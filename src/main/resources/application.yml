@@ -1,7 +1,7 @@
 spring: #???? ??
   datasource: #???? 2?
-    url: jdbc:h2:tcp://localhost/~/react #4?
-    username: react
+    url: jdbc:h2:tcp://localhost/~/springProject #4?
+    username: project
     password: 1234
     driver-class-name: org.h2.Driver
 

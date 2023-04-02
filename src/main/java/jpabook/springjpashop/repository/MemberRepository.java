@@ -1,11 +1,12 @@
 package jpabook.springjpashop.repository;
 
-import jpabook.springjpashop.domain.Member;
+import jpabook.springjpashop.Entity.MemberEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -13,29 +14,38 @@ public class MemberRepository {
 
     private final EntityManager em;
 
-    public void save(Member member) {
+    public void save(MemberEntity member) {
         em.persist(member);
     }
 
-    public Member findOne(Long id) {
-        return em.find(Member.class, id);
+    public MemberEntity findOne(Long id) {
+        return em.find(MemberEntity.class, id);
     }
 
-    public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class)
+    public List<MemberEntity> findAll() {
+        return em.createQuery("select m from MemberEntity m", MemberEntity.class)
                 .getResultList();
     }
 
-    public List<Member> findByName(String name) {
-        return em.createQuery("select m from Member m where m.name = :name", Member.class)
+    public Optional<MemberEntity> findByName(String name) {
+        List<MemberEntity> result = em.createQuery("select m from MemberEntity m where m.name = :name", MemberEntity.class)
                 .setParameter("name", name)
                 .getResultList();
+        return result.stream().findAny();
     }
 
-    public List<Member> findByUserId(String userId){
-        return em.createQuery("select m from  Member m where m.userId = :userId", Member.class)
+    public Optional<MemberEntity> findByUserId(String userId){
+        List<MemberEntity> result = em.createQuery("select m from  MemberEntity m where m.userId = :userId", MemberEntity.class)
                 .setParameter("userId", userId)
                 .getResultList();
+        return result.stream().findAny();
     }
+
+     public Optional<MemberEntity> existById(String userEmail){
+         List<MemberEntity> result = em.createQuery("select m from  MemberEntity m where m.userEmail = :userEmail", MemberEntity.class)
+                 .setParameter("userEmail", userEmail)
+                 .getResultList();
+         return result.stream().findAny();
+     }
 
 }
