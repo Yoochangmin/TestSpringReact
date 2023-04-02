@@ -37,7 +37,6 @@ public class MemberEntity {
     public MemberEntity(MemberDto dto){
         this.userId = dto.getUserId();
         this.userPassword = dto.getUserPassword();
-        this.userName = dto.getUserName();
         this.userEmail=dto.getUserEmail();
     }
 

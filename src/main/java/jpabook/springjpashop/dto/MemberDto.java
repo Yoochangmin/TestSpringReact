@@ -16,7 +16,6 @@ public class MemberDto {
 
     private String userEmail;
 
-    private String userName;
 
     private String userPassword;
     private String userPasswordCheck;
