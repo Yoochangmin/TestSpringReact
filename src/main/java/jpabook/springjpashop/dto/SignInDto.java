@@ -4,20 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class MemberDto {
-    private Long id;
+public class SignInDto {
 
+    @NotBlank
     private String userId;
-
-    private String userEmail;
-
+    @NotBlank
     private String userPassword;
-    private String userPasswordCheck;
-
-
 }

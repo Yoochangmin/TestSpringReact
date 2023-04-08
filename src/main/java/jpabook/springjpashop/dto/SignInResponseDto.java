@@ -1,6 +1,7 @@
 package jpabook.springjpashop.dto;
 
 
+import jpabook.springjpashop.Entity.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberResponseDto {
+public class SignInResponseDto {
     private String token;
     private int exprTime;
+    private MemberEntity member;
 }
