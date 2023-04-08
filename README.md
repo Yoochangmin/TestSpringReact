@@ -16,4 +16,4 @@
 ##버전 
 - JAVA 11
 - spring boot version : 2.7.9
-- gradle
+- gradle 7.6
