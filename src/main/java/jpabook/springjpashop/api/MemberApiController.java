@@ -2,6 +2,8 @@ package jpabook.springjpashop.api;
 
 import jpabook.springjpashop.dto.MemberDto;
 import jpabook.springjpashop.dto.ResponseDto;
+import jpabook.springjpashop.dto.SignInDto;
+import jpabook.springjpashop.dto.SignInResponseDto;
 import jpabook.springjpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,5 +24,11 @@ public class MemberApiController {
         return result;
     }
 
+    //로그인
+    @PostMapping("/api/auth/signIn")
+    public ResponseDto<SignInResponseDto> signIn(@RequestBody SignInDto requestBody){
+        ResponseDto<SignInResponseDto> result = memberService.signIn(requestBody);
+        return result;
+    }
 
 }

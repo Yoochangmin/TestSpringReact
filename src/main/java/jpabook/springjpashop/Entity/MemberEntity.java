@@ -21,9 +21,6 @@ public class MemberEntity {
     @Column(name = "user_id")
     private String userId;
 
-    @Column(name = "user_name")
-    private String userName;
-
     @Column(name = "user_email")
     private String userEmail;
 
@@ -36,8 +33,8 @@ public class MemberEntity {
 
     public MemberEntity(MemberDto dto){
         this.userId = dto.getUserId();
-        this.userPassword = dto.getUserPassword();
         this.userEmail=dto.getUserEmail();
+        this.userPassword = dto.getUserPassword();
     }
 
 }

@@ -34,7 +34,7 @@ public class MemberRepository {
         return result.stream().findAny();
     }
 
-    public Optional<MemberEntity> findByUserId(String userId){
+    public Optional<MemberEntity> findById(String userId){
         List<MemberEntity> result = em.createQuery("select m from  MemberEntity m where m.userId = :userId", MemberEntity.class)
                 .setParameter("userId", userId)
                 .getResultList();
