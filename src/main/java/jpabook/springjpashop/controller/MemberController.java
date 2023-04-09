@@ -3,27 +3,25 @@ package jpabook.springjpashop.controller;
 
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.service.MemberService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.GeneratedValue;
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/api/test")
+//@RequestMapping("/api/spring")
 public class MemberController {
 
-    private final MemberService memberService;
 
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
+    @GetMapping("/")
+    public String getMember(@AuthenticationPrincipal String userId){
+        System.out.println(userId);
+        return "로그인된 사용자는"+ userId + "입니다";
     }
-
-
-
-
-
 
 
 

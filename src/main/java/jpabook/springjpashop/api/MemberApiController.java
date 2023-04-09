@@ -25,7 +25,7 @@ public class MemberApiController {
     }
 
     //로그인
-    @PostMapping("/test/signIn")
+    @PostMapping("/api/auth/signIn")
     public ResponseDto<SignInResponseDto> signIn(@RequestBody SignInDto requestBody){
         ResponseDto<SignInResponseDto> result = memberService.signIn(requestBody);
         return result;
