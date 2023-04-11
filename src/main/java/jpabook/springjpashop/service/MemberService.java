@@ -10,6 +10,9 @@ import jpabook.springjpashop.repository.UserRepository;
 import jpabook.springjpashop.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +32,7 @@ public class MemberService {
     private final TokenProvider tokenProvider;
     @Autowired
     private final UserRepository userRepository;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public ResponseDto<?> signUp(MemberDto dto){
         String userId = dto.getUserId();
@@ -49,6 +53,11 @@ public class MemberService {
             return ResponseDto.setFailed("password does not matched");
 
         MemberEntity memberEntity = new MemberEntity(dto);
+
+        //비밀번호 암호화
+        String encodedPassword = passwordEncoder.encode(userPassword);
+        memberEntity.setUserPassword(encodedPassword);
+
         //데이터베이스에 Entity 저장
         try {
             userRepository.save(memberEntity);
@@ -65,18 +74,16 @@ public class MemberService {
 
       String userId = dto.getUserId();  // 유저 아이디 값
       String userPassword = dto.getUserPassword(); // 유저 비밀번호 값
-      //이메일 중복 확인
-      try {
-      boolean existed = userRepository.existsByUserIdAndUserPassword(userId, userPassword);
-        if(!existed) return ResponseDto.setFailed( "Sign In Information Does Not Match " + userId + " " + userPassword);
-        }catch (Exception error){
-            return ResponseDto.setFailed("Database Error");
-        }
 
-        MemberEntity memberEntity;
+
+        MemberEntity memberEntity=null;
         try {
-        memberEntity = userRepository.findByUserId(userId).get();
-
+            memberEntity = userRepository.findByUserId(userId);
+            //아이디가 틀릴 경우
+            if(memberEntity ==null) return ResponseDto.setFailed("Sign In Failed");
+            //비밀번호가 틀릴 경우
+            if(passwordEncoder.matches(userPassword, memberEntity.getUserPassword()))
+                return ResponseDto.setFailed("Sign In Failed");
         }catch (Exception error) {
             return ResponseDto.setFailed("Database Error");
         }

@@ -17,7 +17,7 @@ public class MemberApiController {
     private final MemberService memberService;
 
     //회원가입
-    @PostMapping("/how-about-idea")
+    @PostMapping("/")
     public ResponseDto<?> signUp(@RequestBody @Valid MemberDto requestBody){
         System.out.println(requestBody);
         ResponseDto<?> result = memberService.signUp(requestBody);

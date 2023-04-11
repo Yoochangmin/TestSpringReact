@@ -27,9 +27,9 @@ public class MemberEntity {
     @Column(name = "user_password")
     private String userPassword;
 
-//    @Column(name = "mind_map_id")
-//    @OneToMany(mappedBy = "member")
-//    private List<MindMapEntity> mindMap = new ArrayList<>();
+    @Column(name = "mind_map_id")
+    @OneToMany(mappedBy = "member")
+    private List<MindMapEntity> mindMap = new ArrayList<>();
 
     public MemberEntity(MemberDto dto){
         this.userId = dto.getUserId();
