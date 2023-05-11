@@ -5,28 +5,18 @@ import jpabook.springjpashop.dto.MemberDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.dto.SignInDto;
 import jpabook.springjpashop.dto.SignInResponseDto;
-import jpabook.springjpashop.repository.MemberRepository;
 import jpabook.springjpashop.repository.UserRepository;
 import jpabook.springjpashop.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
-//@Transactional(readOnly = true)
-//@Transactional
-
 @RequiredArgsConstructor
 public class MemberService {
-
-    @Autowired
-    private final MemberRepository memberRepository;
 
     @Autowired
     private final TokenProvider tokenProvider;
@@ -34,10 +24,12 @@ public class MemberService {
     private final UserRepository userRepository;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    //회원가입
     public ResponseDto<?> signUp(MemberDto dto){
         String userId = dto.getUserId();
         String userPassword = dto.getUserPassword();
         String userPasswordCheck = dto.getUserPasswordCheck();
+        String userEmail = dto.getUserEmail();
 
 //         id 중복 확인
         try {
@@ -52,6 +44,7 @@ public class MemberService {
         if (!userPassword.equals(userPasswordCheck))
             return ResponseDto.setFailed("password does not matched");
 
+        //MemberEntity 생성
         MemberEntity memberEntity = new MemberEntity(dto);
 
         //비밀번호 암호화
@@ -62,31 +55,33 @@ public class MemberService {
         try {
             userRepository.save(memberEntity);
         }catch (Exception e){
-            return ResponseDto.setSuccess("Sign Up Success!",null);
+            return ResponseDto.setFailed("Sign Up Faild!");
         }
 
-        return ResponseDto.setSuccess("Sign Up Success!", null);
+        return ResponseDto.setSuccess("Sign Up Success!", dto);
 
     }
 
     //로그인 서비스
-    public ResponseDto<SignInResponseDto> signIn(SignInDto dto){
+    public ResponseDto<SignInResponseDto> signIn(SignInDto dto) {
 
-      String userId = dto.getUserId();  // 유저 아이디 값
-      String userPassword = dto.getUserPassword(); // 유저 비밀번호 값
+        String userId = dto.getUserId();  // 유저 아이디 값
+        String userPassword = dto.getUserPassword(); // 유저 비밀번호 값
 
 
-        MemberEntity memberEntity=null;
+        MemberEntity memberEntity = null;
         try {
             memberEntity = userRepository.findByUserId(userId);
             //아이디가 틀릴 경우
-            if(memberEntity ==null) return ResponseDto.setFailed("Sign In Failed");
+            if (memberEntity == null) return ResponseDto.setFailed("Sign In Failed : Id is not consist");
             //비밀번호가 틀릴 경우
-            if(passwordEncoder.matches(userPassword, memberEntity.getUserPassword()))
-                return ResponseDto.setFailed("Sign In Failed");
-        }catch (Exception error) {
+            if (!passwordEncoder.matches(userPassword, memberEntity.getUserPassword()))
+                return ResponseDto.setFailed("Sign In Failed  : PW is not consist");
+        } catch (Exception error) {
             return ResponseDto.setFailed("Database Error");
         }
+
+        memberEntity.setUserPassword("");
 
         String token = tokenProvider.create(userId);
         int exprTime = 3600000;

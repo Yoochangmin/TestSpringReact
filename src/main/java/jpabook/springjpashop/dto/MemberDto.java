@@ -1,11 +1,11 @@
 package jpabook.springjpashop.dto;
 
-import jpabook.springjpashop.Entity.MindMapEntity;
+import jpabook.springjpashop.Entity.MemberLikeEntity;
+import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class MemberDto {
-    private Long id;
-
     private String userId;
 
     private String userEmail;
@@ -23,5 +21,7 @@ public class MemberDto {
     private String userPasswordCheck;
 
     private List<MindMapEntity> mindMap = new ArrayList<>();
+
+    private MemberLikeEntity memberLike;
 
 }

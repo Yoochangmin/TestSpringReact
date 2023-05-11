@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MindeMapDto {
+public class WordRelationDto {
+    private Long id;
 
-    private long id;
-
-    private String hightWord;
-
+    private String string;
 }

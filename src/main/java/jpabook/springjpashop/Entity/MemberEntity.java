@@ -1,5 +1,7 @@
 package jpabook.springjpashop.Entity;
 
+import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
+import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import jpabook.springjpashop.dto.MemberDto;
 import lombok.*;
 
@@ -28,13 +30,24 @@ public class MemberEntity {
     private String userPassword;
 
     @Column(name = "mind_map_id")
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private List<MindMapEntity> mindMap = new ArrayList<>();
+
+    @OneToOne(mappedBy = "memberEntity", fetch = FetchType.LAZY)
+    private MemberLikeEntity memberLike;
+
+    public void addMindMap(MindMapEntity mindMapEntity){
+        mindMap.add(mindMapEntity);
+        mindMapEntity.setMemberEntity(this);
+    }
 
     public MemberEntity(MemberDto dto){
         this.userId = dto.getUserId();
         this.userEmail=dto.getUserEmail();
         this.userPassword = dto.getUserPassword();
+        this.mindMap = dto.getMindMap();
+        this.memberLike= dto.getMemberLike();
     }
 
 }
+
