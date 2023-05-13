@@ -1,12 +1,15 @@
 package jpabook.springjpashop.service;
 
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
+import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.MindMapEdgeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.Min;
 
 
 @Service
@@ -20,7 +23,7 @@ public class MindMapEdgeService {
         String id = dto.getId();
         String source = dto.getSource();
         String target = dto.getTarget();
-
+        MindMapEntity mindMapEntity =dto.getMindMapEntity();
         MindMapEdge mindMapEdge = new MindMapEdge(dto);
         try {
             mindMapEdgeRepository.save(mindMapEdge);

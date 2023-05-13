@@ -25,19 +25,19 @@ public class MindMapNode {
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mind_map_id")
     private MindMapEntity mindMapEntity;
 
-
-    public MindMapNode(MindMapNodeDto dto){
+    //연관관계 매서드
+//     public void setMindMapEntity(MindMapEntity mindMapEntity) {
+//            this.mindMapEntity = mindMapEntity;
+//            mindMapEntity.getMindMapNodes().add(this);
+//     }
+        public MindMapNode(MindMapNodeDto dto){
         this.id = dto.getId();
         this.label = dto.getLabel();
         this.type = dto.getType();
+        this.mindMapEntity=dto.getMindMapEntity();
     }
 
-    // 연관관계 매서드
-    public void setMindMapEntity(MindMapEntity mindMapEntity) {
-
-        this.mindMapEntity = mindMapEntity;
-        mindMapEntity.getMindMapNodes().add(this);
-    }
 }

@@ -28,15 +28,15 @@ public class MindMapEdge {
     private MindMapEntity mindMapEntity;
 
     //연관관계 매서드
-    public void setMindMapEntity(MindMapEntity mindMapEntity) {
-
-        this.mindMapEntity = mindMapEntity;
-        mindMapEntity.getMindMapEdges().add(this);
-    }
+//    public void setMindMapEntity(MindMapEntity mindMapEntity) {
+//        this.mindMapEntity = mindMapEntity;
+//        mindMapEntity.getMindMapEdges().add(this);
+//    }
     public MindMapEdge(MindMapEdgeDto dto){
         this.id =dto.getId();
         this.source = dto.getSource();
         this.target = dto.getTarget();
+        this.mindMapEntity=dto.getMindMapEntity();
     }
 
     // getters and setters

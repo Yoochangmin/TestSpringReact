@@ -40,7 +40,7 @@ public class MemberApiController {
     @PostMapping("/api/auth/signIn")
     public ResponseDto<SignInResponseDto> signIn(@RequestBody SignInDto requestBody){
         ResponseDto<SignInResponseDto> result = memberService.signIn(requestBody);
-
+        System.out.println(result);
         return result;
     }
 

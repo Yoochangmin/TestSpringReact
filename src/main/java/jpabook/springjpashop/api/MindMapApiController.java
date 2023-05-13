@@ -45,15 +45,15 @@ public class MindMapApiController {
     @Autowired
     private final MindMapEdgeService mindMapEdgeService;
     @PostMapping("/api/auth/testApi")
-    public ResponseDto<?> createMindMap(@RequestBody MindMapRequestDto requestBody) throws JsonProcessingException {
+    public ResponseDto<?> createMindMap(@RequestBody MindMapEntityDto requestBody) throws JsonProcessingException {
         //Object jsonString = requestBody; // JSON 데이터
-        String highestWord;
-
+        System.out.println(requestBody);
         ObjectMapper mapper = new ObjectMapper();
+
         String jsonString = mapper.writeValueAsString(requestBody);
         JsonNode rootNode = mapper.readTree(jsonString);
 
-        ArrayList<String> strList = new ArrayList<String>(Arrays.asList(jsonString));
+        ResponseDto<?> mindMap = mindMapService.createMindMap(requestBody);
 
 
         // mindMapNode 파싱
@@ -64,6 +64,7 @@ public class MindMapApiController {
             dto.setId(node.path("id").asText());
             dto.setLabel(node.path("label").asText());
             dto.setType(node.path("type").asText());
+            dto.setMindMapEntity((MindMapEntity) mindMap.getData());
             mindMapNodes.add(dto);
         }
         System.out.println("마인드맵 노드 분리: " + mindMapNodes);
@@ -77,17 +78,15 @@ public class MindMapApiController {
             dto.setId(edge.path("id").asText());
             dto.setSource(edge.path("source").asText());
             dto.setTarget(edge.path("target").asText());
+            dto.setMindMapEntity((MindMapEntity) mindMap.getData());
             mindMapEdges.add(dto);
         }
 
         System.out.println("마인드맵 엣지 분리: " + mindMapEdges);
-        System.out.println("마인드맵 엣지 타입: " + mindMapEdges.getClass());
 
-//        mindMapService.createMindMap(requestBody);
         //노드 리스트 분리
         for (MindMapNodeDto mindNode : mindMapNodes)
         {
-
             mindMapNodeService.createNode(mindNode);
             System.out.println(mindNode);
         }
@@ -99,7 +98,6 @@ public class MindMapApiController {
         }
 
 
-//        ResponseDto<?> result = mindMapService.createMindMap(requestBody);
         return null;
     }
 

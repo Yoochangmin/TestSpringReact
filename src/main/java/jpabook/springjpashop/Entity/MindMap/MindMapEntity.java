@@ -1,8 +1,8 @@
 package jpabook.springjpashop.Entity.MindMap;
 
 import jpabook.springjpashop.Entity.MakeSentenceEntity;
-import jpabook.springjpashop.Entity.MemberEntity;
 //import jpabook.springjpashop.Entity.MindRelationEntity;
+import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MemberLikeEntity;
 import jpabook.springjpashop.Entity.MindRelationEntity;
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-@Entity(name = "MindMap")
+@Entity(name ="MindMap")
 @Table(name = "MindMap")
 @Setter @Getter
 @NoArgsConstructor
@@ -25,21 +26,20 @@ public class MindMapEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mind_map_id")
     private long id;
-
-
     private String highestWord;
 
-
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id" )
     private MemberEntity memberEntity;
 
-    @OneToMany(mappedBy = "mindMapEntity",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<MindMapNode> mindMapNodes = new ArrayList<>();
+//    @OneToMany(mappedBy = "mindMapEntity",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<MindMapNode> mindMapNodes = new ArrayList<>();
+//    @OneToMany(mappedBy = "mindMapEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<MindMapEdge> mindMapEdges = new ArrayList<>();
 
-    @OneToMany(mappedBy = "mindMapEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<MindMapEdge> mindMapEdges = new ArrayList<>();
+
+
+
 
     @OneToMany(mappedBy = "mindMapEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<MakeSentenceEntity> makeSentenceEntityList = new ArrayList<>();
@@ -50,43 +50,48 @@ public class MindMapEntity {
     @OneToOne(mappedBy = "mindMapEntity", fetch = FetchType.LAZY)
     private MemberLikeEntity memberLikeEntity;
 
-
+    public MindMapEntity(MindMapEntityDto dto){
+        this.highestWord = dto.getHighestWord();
+//        this.mindMapNodes = dto.getMindMapNodes();
+//        this.mindMapEdges = dto.getMindMapEdges();
+//        this.mindRelationEntity = dto.getMindRelationEntity();
+//        this.memberLikeEntity = dto.getMemberLikeEntity();
+    }
 
     //== 연관관계 매서드 ==//
-    public void addMindMapNode(MindMapNode mindMapNode){
-        mindMapNodes.add(mindMapNode);
-        mindMapNode.setMindMapEntity(this);
-    }
-    public void addMindMapEdge(MindMapEdge mindMapEdge){
-        mindMapEdges.add(mindMapEdge);
-        mindMapEdge.setMindMapEntity(this);
-    }
+
+//    public void addMindMapNode(MindMapNode mindMapNode){
+//        mindMapNodes.add(mindMapNode);
+//        mindMapNode.setMindMapEntity(this);
+//    }
+//    public void addMindMapEdge(MindMapEdge mindMapEdge){
+//        mindMapEdges.add(mindMapEdge);
+//        mindMapEdge.setMindMapEntity(this);
+//    }
 
     public void addMakeSentence(MakeSentenceEntity makeSentence){
         makeSentenceEntityList.add(makeSentence);
         makeSentence.setMindMapEntity(this);
     }
 
-    public void setMemberEntity(MemberEntity memberEntity) {
-        this.memberEntity = memberEntity;
+    public void setMemberEntity(MemberEntity memberEntity){
+        this.memberEntity=memberEntity;
+        memberEntity.getMindMap().add(this);
     }
-
-    public MindMapEntity(MindMapEntityDto dto){
-        this.memberEntity = dto.getMemberEntity();
-        this.highestWord = dto.getHightWord();
-        this.mindMapNodes = dto.getMindMapNodes();
-        this.mindMapEdges = dto.getMindMapEdges();
-        this.mindRelationEntity = dto.getMindRelationEntity();
-        this.memberLikeEntity = dto.getMemberLikeEntity();
+/**
+ *  연관관계 메소드
+    public void setMindRelation(MindRelation mindRelation){
+        this.mindRelation =mindRelation;
+        mindRelation.setMindMap(this);
     }
-
-    //== 생성 메서드 ==//
-//    public static MindMapEntity createMindMap(MindMapNode mindMapNodes, MindMapEdge mindMapEdges){
+**/
+//    == 생성 메서드 ==//
+//    public static MindMapEntity createMindMap(MindMapNode mindMapNodes, MindMapEdge ...mindMapEdges){
 //        MindMapEntity mindMap = new MindMapEntity();
-//        for (MindMapNode mindMapNode : mindMapNodes) {
-//            mindMap.setMindMapEdges();
-//        }
-//        mindMap.setMindMapNodes();
+//
+//        mindMap.setMindMapNodes((List<MindMapNode>) mindMapNodes);
+//        mindMap.setMindMapEdges(Collections.unmodifiableList( mindMapEdges));
+//        return mindMap;
 //    }
 
 
@@ -103,9 +108,5 @@ public class MindMapEntity {
 
 
 
-//    //연관관계 메소드
-//    public void setMindRelation(MindRelation mindRelation){
-//        this.mindRelation =mindRelation;
-//        mindRelation.setMindMap(this);
-//    }
+
 }

@@ -14,6 +14,8 @@ public class MindMapEdgeDto {
     private String source;
     private String target;
 
+    private MindMapEntity mindMapEntity;
+
 
     @Override
     public String toString() {

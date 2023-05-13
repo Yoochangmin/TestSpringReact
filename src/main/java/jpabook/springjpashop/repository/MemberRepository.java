@@ -14,6 +14,7 @@ public class MemberRepository {
 
     private final EntityManager em;
 
+
     public void save(MemberEntity member) {
         em.persist(member);
     }

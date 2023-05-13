@@ -3,6 +3,7 @@ package jpabook.springjpashop.service;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 //import jpabook.springjpashop.MindMapMapper;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
+import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
 import jpabook.springjpashop.dto.MindMap.MindMapRequestDto;
 import jpabook.springjpashop.dto.ResponseDto;
@@ -26,25 +27,20 @@ public class MindMapService{
     private final MindMapNodeRepository mindMapNodeRepository;
     private final MindMapEdgeRepository mindMapEdgeRepository;
     private final MindMapNodeService nodeService;
-//
     private final MindMapEdgeService edgeService;
 
-    public ResponseDto<?> createMindMap(MindMapRequestDto dto) {
-        List<MindMapNodeDto> mindMapNodes = dto.getMindMapNode();
-        List<MindMapEdgeDto> mindMapEdges = dto.getMindMapEdge();
-
-
-        //json 데이터 노드와 엣지 분리
-        String result = mindMapEntity.JsonSeparate(dto);
+    public ResponseDto<?> createMindMap(MindMapEntityDto dto) {
+        String highestWord= dto.getHighestWord();
+//        List<MindMapNodeDto> mindMapNoes = dto.getMindMapNode();
+//        List<MindMapEdgeDto> mindMapEdges = dto.getMindMapEdge();
 
 //        MindMapNode mindMapNode = new MindMapNode();
 //        MindMapEdge mindMapEdge = new MindMapEdge();
 
-        MindMapEntity mindMapEntity = new MindMapEntity();
+        MindMapEntity mindMapEntity = new MindMapEntity(dto);
         // 노드 엣지 DB 저장
-        nodeService.createNode((MindMapNodeDto) mindMapNodes);
-        edgeService.createEdge((MindMapEdgeDto) mindMapEdges);
-//
+//        nodeService.createNode((MindMapNodeDto) mindMapNodes);
+//        edgeService.createEdge((MindMapEdgeDto) mindMapEdges);
 
         //데이터베이스에 mindMap 저장
         try {
@@ -52,7 +48,7 @@ public class MindMapService{
         }catch (Exception e){
             return ResponseDto.setFailed("Save Faild!");
         }
-        return ResponseDto.setSuccess("Save Success!", dto);
+        return ResponseDto.setSuccess("Save Success!", mindMapEntity);
     }
 
 

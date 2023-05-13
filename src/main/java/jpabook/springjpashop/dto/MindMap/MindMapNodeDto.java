@@ -4,16 +4,19 @@ import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import lombok.*;
 
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Data @Getter @Setter
+
 public class MindMapNodeDto {
 
     private String id;
     private String label;
     private String type;
 
+    private MindMapEntity mindMapEntity;
 
 
     @Override

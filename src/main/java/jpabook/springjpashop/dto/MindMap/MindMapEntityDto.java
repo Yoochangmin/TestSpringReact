@@ -16,13 +16,12 @@ import java.util.List;
 @Data
 public class MindMapEntityDto {
 
-    private List<MindMapNode> mindMapNodes;
-    private List<MindMapEdge> mindMapEdges;
-    private MemberEntity memberEntity;
+    private List<MindMapNode> mindMapNode;
+    private List<MindMapEdge> mindMapEdge;
 
-    private MindRelationEntity mindRelationEntity;
-    private MemberLikeEntity memberLikeEntity;
-    private String hightWord;
+    private String highestWord;
+
+    private MemberEntity memberEntity;
 //    private String lowestWord;
 
 }
