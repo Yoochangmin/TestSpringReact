@@ -1,6 +1,7 @@
 package jpabook.springjpashop.Entity;
 
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
+import jpabook.springjpashop.dto.MemberLikeDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class MemberLikeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="member_like_id")
     private Long id;
+    private byte like;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -28,6 +30,12 @@ public class MemberLikeEntity {
     @JoinColumn(name = "mind_map_id")
     private MindMapEntity mindMapEntity;
 
-    private Byte Like;
+
+    public MemberLikeEntity(MemberLikeDto dto) {
+        this.like =dto.getLike();
+        this.mindMapEntity= getMindMapEntity();
+    }
+
+
 
 }

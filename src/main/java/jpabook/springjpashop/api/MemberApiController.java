@@ -25,7 +25,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberApiController {
     private final MemberService memberService;
-    private final MindMapService mindMapService;
 
     //회원가입
     @PostMapping("/api/auth/signUp")

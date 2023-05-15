@@ -1,5 +1,6 @@
 package jpabook.springjpashop.dto.MindMap;
 
+import jpabook.springjpashop.Entity.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MemberLikeEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
@@ -22,6 +23,8 @@ public class MindMapEntityDto {
     private String highestWord;
 
     private MemberEntity memberEntity;
-//    private String lowestWord;
+    private Long memberId;
+
+    private MakeSentenceEntity makeSentenceEntity;
 
 }

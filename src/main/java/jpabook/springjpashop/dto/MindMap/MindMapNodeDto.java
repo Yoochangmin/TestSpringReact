@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data @Getter @Setter
+@Data
 
 public class MindMapNodeDto {
 

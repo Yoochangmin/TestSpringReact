@@ -22,6 +22,6 @@ public class MemberDto {
 
     private List<MindMapEntity> mindMap = new ArrayList<>();
 
-    private MemberLikeEntity memberLike;
+//    private MemberLikeEntity memberLike;
 
 }

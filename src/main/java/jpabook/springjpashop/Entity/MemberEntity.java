@@ -1,7 +1,6 @@
 package jpabook.springjpashop.Entity;
 
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
-import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import jpabook.springjpashop.dto.MemberDto;
 import lombok.*;
 
@@ -33,8 +32,6 @@ public class MemberEntity {
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private List<MindMapEntity> mindMap = new ArrayList<>();
 
-    @OneToOne(mappedBy = "memberEntity", fetch = FetchType.LAZY)
-    private MemberLikeEntity memberLike;
 
     public void addMindMap(MindMapEntity mindMapEntity){
         mindMap.add(mindMapEntity);
@@ -46,7 +43,8 @@ public class MemberEntity {
         this.userEmail=dto.getUserEmail();
         this.userPassword = dto.getUserPassword();
         this.mindMap = dto.getMindMap();
-        this.memberLike= dto.getMemberLike();
+//        this.
+//        this.memberLike= dto.getMemberLike();
     }
 
 }

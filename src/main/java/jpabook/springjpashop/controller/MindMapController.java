@@ -23,6 +23,7 @@ public class MindMapController {
     @Autowired
     private final MindMapRepository mindMapRepository;
 
+    //마인드맵 전체 조회 api
     @GetMapping("/api/auth/allMindMap")
     public List<MindMapEntityDto> mindMapV3() {
         List<MindMapEntity> mindMap = mindMapRepository.findAll();
@@ -31,4 +32,6 @@ public class MindMapController {
                 .collect(toList());
         return result;
     }
+
+
 }

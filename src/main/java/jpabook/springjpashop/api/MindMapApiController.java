@@ -2,8 +2,11 @@ package jpabook.springjpashop.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jpabook.springjpashop.Entity.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
+import jpabook.springjpashop.dto.MakeSentenceDto;
+import jpabook.springjpashop.dto.MemberDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
@@ -12,6 +15,7 @@ import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.MindMapEdgeRepository;
 import jpabook.springjpashop.repository.MindMapNodeRepository;
 import jpabook.springjpashop.repository.MindMapRepository;
+import jpabook.springjpashop.service.MakeSentenceService;
 import jpabook.springjpashop.service.MindMapEdgeService;
 import jpabook.springjpashop.service.MindMapNodeService;
 import jpabook.springjpashop.service.MindMapService;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,16 +40,12 @@ public class MindMapApiController {
     @Autowired
     private final MindMapService mindMapService;
     @Autowired
-    private final MindMapRepository mindMapRepository;
-    @Autowired
-    private final MindMapNodeRepository mindMapNodeRepository;
-    @Autowired
-    private final MindMapEdgeRepository mindMapEdgeRepository;
-    @Autowired
     private final MindMapNodeService mindMapNodeService;
     @Autowired
+    private final MakeSentenceService makeSentenceService;
+    @Autowired
     private final MindMapEdgeService mindMapEdgeService;
-    @PostMapping("/api/auth/testApi")
+    @PostMapping("/api/auth/saveMindMap")
     public ResponseDto<?> createMindMap(@RequestBody MindMapEntityDto requestBody) throws JsonProcessingException {
         //Object jsonString = requestBody; // JSON 데이터
         System.out.println(requestBody);
@@ -97,23 +98,14 @@ public class MindMapApiController {
             System.out.println(mindEdge);
         }
 
-
-        return null;
+        return mindMap;
     }
 
-    @PostMapping("/api/auth/testApiV2")
-    public ResponseDto<?> createMindMapV2(@RequestBody MindMapRequestDto requestBody) throws JsonProcessingException {
-//        ResponseDto<?> result = mindMapService.createMindMap(requestBody);
-
-//        System.out.println(requestBody);
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(requestBody);
-        ArrayList<String> strList = new ArrayList<String>(Arrays.asList(json));
-
-        System.out.println(json.getClass().getName());
-        System.out.println(strList.getClass().getName());
-        System.out.println(strList);
-
-        // 이하 생략
-        return null;
-    }}
+    @PostMapping("/api/auth/saveSentence")
+    public ResponseDto<?> saveSentence(@RequestBody MakeSentenceDto requestBody) throws JsonProcessingException {
+        ResponseDto<?> result = makeSentenceService.saveSentence(requestBody);
+        System.out.println(requestBody);
+        System.out.println(requestBody.getClass().getName());
+        return result;
+    }
+}

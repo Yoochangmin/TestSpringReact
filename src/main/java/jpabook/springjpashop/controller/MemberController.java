@@ -1,6 +1,7 @@
 package jpabook.springjpashop.controller;
 
 
+import jpabook.springjpashop.Entity.MemberEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
 
-    @GetMapping("/")
-    public String getMember(@AuthenticationPrincipal String userId){
-        System.out.println(userId);
-        return "로그인된 사용자는"+ userId + "입니다";
+    @GetMapping("/uerInpo")
+    public String getMember(@AuthenticationPrincipal MemberEntity memberEntity){
+        System.out.println(memberEntity.getUserId());
+        return "로그인된 사용자는"+ memberEntity.getUserId() + "입니다";
     }
 
 
