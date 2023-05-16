@@ -1,28 +1,18 @@
 package jpabook.springjpashop.dto.MindMap;
 
-import jpabook.springjpashop.Entity.MakeSentenceEntity;
-import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
+import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class MindMapEntityDto {
+public class MindMapResponseDto {
 
     private List<MindMapNode> mindMapNode;
     private List<MindMapEdge> mindMapEdge;
-
-    private String highestWord;
-
-    private MemberEntity memberEntity;
-    private Long memberId;
-
-    private MakeSentenceEntity makeSentenceEntity;
-
 }

@@ -18,9 +18,6 @@ public class MakeSentenceDto {
     private String combineWord2;
 
     Date publicationDate;
-    private int likeCount;
-
-    private int unLikeCount;
 
     private byte starRating;
 

@@ -5,7 +5,7 @@ import jpabook.springjpashop.dto.MemberDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.dto.SignInDto;
 import jpabook.springjpashop.dto.SignInResponseDto;
-import jpabook.springjpashop.repository.UserRepository;
+import jpabook.springjpashop.repository.MemberJpaRepository;
 import jpabook.springjpashop.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class MemberService {
     @Autowired
     private final TokenProvider tokenProvider;
     @Autowired
-    private final UserRepository userRepository;
+    private final MemberJpaRepository memberJpaRepository;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     //회원가입
@@ -33,7 +33,7 @@ public class MemberService {
 
 //         id 중복 확인
         try {
-            if(userRepository.existsByUserId(userId))
+            if(memberJpaRepository.existsByUserId(userId))
                 return ResponseDto.setFailed("Existed Email!!");
         }catch (Exception e){
             return ResponseDto.setFailed("Data Base Erroe!!");
@@ -53,7 +53,7 @@ public class MemberService {
 
         //데이터베이스에 Entity 저장
         try {
-            userRepository.save(memberEntity);
+            memberJpaRepository.save(memberEntity);
         }catch (Exception e){
             return ResponseDto.setFailed("Sign Up Faild!");
         }
@@ -71,7 +71,7 @@ public class MemberService {
         System.out.println("유저정보 검색" + dto);
         MemberEntity memberEntity = null;
         try {
-            memberEntity = userRepository.findByUserId(userId);
+            memberEntity = memberJpaRepository.findByUserId(userId);
             System.out.println(memberEntity);
             //아이디가 틀릴 경우
             if (memberEntity == null) return ResponseDto.setFailed("Sign In Failed : Id is not consist");

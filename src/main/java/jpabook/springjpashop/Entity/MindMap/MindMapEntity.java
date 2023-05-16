@@ -1,19 +1,12 @@
 package jpabook.springjpashop.Entity.MindMap;
 
-import jpabook.springjpashop.Entity.MakeSentenceEntity;
 //import jpabook.springjpashop.Entity.MindRelationEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
-import jpabook.springjpashop.Entity.MemberLikeEntity;
-import jpabook.springjpashop.Entity.MindRelationEntity;
-import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
-import jpabook.springjpashop.dto.MindMap.MindMapRequestDto;
-import lombok.*;
+        import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
+        import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Entity(name ="MindMap")
 @Table(name = "MindMap")

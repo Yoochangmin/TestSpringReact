@@ -33,9 +33,6 @@ public class MakeSentenceEntity {
     private String combineWord1;
     private String combineWord2;
 
-    private int likeCount;
-    private int unLikeCount;
-
     private byte starRating;
 
     private byte show;
@@ -56,8 +53,6 @@ public class MakeSentenceEntity {
         this.combineWord1 = dto.getCombineWord1();
         this.combineWord2 = dto.getCombineWord2();
         this.publicationDate = dto.getPublicationDate();
-        this.likeCount = dto.getLikeCount();
-        this.unLikeCount = dto.getUnLikeCount();
         this.show = dto.getShow();
         this.mindMapEntity = dto.getMindMapEntity();
     }

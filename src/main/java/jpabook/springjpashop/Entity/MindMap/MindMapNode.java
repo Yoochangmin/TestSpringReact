@@ -24,7 +24,7 @@ public class MindMapNode {
     private String label;
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mind_map_id")
     private MindMapEntity mindMapEntity;
 

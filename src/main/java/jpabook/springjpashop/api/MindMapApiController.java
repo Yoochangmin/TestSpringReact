@@ -2,37 +2,24 @@ package jpabook.springjpashop.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jpabook.springjpashop.Entity.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
-import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import jpabook.springjpashop.dto.MakeSentenceDto;
-import jpabook.springjpashop.dto.MemberDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
-import jpabook.springjpashop.dto.MindMap.MindMapRequestDto;
 import jpabook.springjpashop.dto.ResponseDto;
-import jpabook.springjpashop.repository.MindMapEdgeRepository;
-import jpabook.springjpashop.repository.MindMapNodeRepository;
-import jpabook.springjpashop.repository.MindMapRepository;
 import jpabook.springjpashop.service.MakeSentenceService;
 import jpabook.springjpashop.service.MindMapEdgeService;
 import jpabook.springjpashop.service.MindMapNodeService;
 import jpabook.springjpashop.service.MindMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequiredArgsConstructor

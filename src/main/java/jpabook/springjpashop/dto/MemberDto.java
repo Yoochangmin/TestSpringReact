@@ -1,6 +1,5 @@
 package jpabook.springjpashop.dto;
 
-import jpabook.springjpashop.Entity.MemberLikeEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
