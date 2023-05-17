@@ -30,5 +30,6 @@ public class PatentRelation {
 
     public PatentRelation(PatentRelationDto dto){
         this.patentSentence = dto.getPatentSentence();
+        this.makeSentenceEntity =dto.getMakeSentenceEntity();
     }
 }

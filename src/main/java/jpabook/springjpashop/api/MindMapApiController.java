@@ -101,6 +101,7 @@ public class MindMapApiController {
             PatentRelationDto dto = new PatentRelationDto();
             dto.setPatentSentence(patentSentence);
             dto.setMakeSentenceEntity((MakeSentenceEntity) makeSentence.getData());
+            System.out.println("TEST 찾기"+ makeSentence.getData());
             patentRelationService.saveSentence(dto);
         }
         return makeSentence;
