@@ -1,6 +1,6 @@
 package jpabook.springjpashop.dto.MindMap;
 
-import jpabook.springjpashop.Entity.MakeSentenceEntity;
+import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
@@ -21,8 +21,6 @@ public class MindMapEntityDto {
     private String highestWord;
 
     private MemberEntity memberEntity;
-    private Long memberId;
-
     private MakeSentenceEntity makeSentenceEntity;
 
 }

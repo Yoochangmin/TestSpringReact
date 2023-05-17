@@ -1,4 +1,4 @@
-package jpabook.springjpashop.api;
+package jpabook.springjpashop.controller;
 
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapRequestDto;
@@ -26,11 +26,11 @@ public class testController {
         // setter, getter, toString 메서드
     }
 
-    @PostMapping("/api/auth/t")
-    public ResponseDto<?> json(@RequestBody MindMapEntityDto dto) {
-        // [items=[JsonDTO [name=홍길동, age=20], JsonDTO [name=이순신, age=30]]]
-        System.out.println(dto.toString());
-
-        return ResponseDto.setSuccess("test", dto);
+    //마인드맵 전체 조회
+    @GetMapping("/api/auth/mindMapTest")
+    public ResponseDto<?> getAllMindMapData() {
+        ResponseDto<?> result =mindMapService.getAllTestData();
+        System.out.println(result);
+        return result;
     }
 }

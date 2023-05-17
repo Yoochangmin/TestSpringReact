@@ -1,7 +1,7 @@
 package jpabook.springjpashop.service;
 
-import jpabook.springjpashop.Entity.MakeSentenceEntity;
-import jpabook.springjpashop.dto.MakeSentenceDto;
+import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
+import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.MakeSentenceRepository;
 import lombok.RequiredArgsConstructor;

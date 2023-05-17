@@ -2,16 +2,15 @@ package jpabook.springjpashop.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
-import jpabook.springjpashop.dto.MakeSentenceDto;
+import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
+import jpabook.springjpashop.dto.MakeSentence.PatentRelationDto;
 import jpabook.springjpashop.dto.ResponseDto;
-import jpabook.springjpashop.service.MakeSentenceService;
-import jpabook.springjpashop.service.MindMapEdgeService;
-import jpabook.springjpashop.service.MindMapNodeService;
-import jpabook.springjpashop.service.MindMapService;
+import jpabook.springjpashop.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,12 +31,15 @@ public class MindMapApiController {
     private final MakeSentenceService makeSentenceService;
     @Autowired
     private final MindMapEdgeService mindMapEdgeService;
+
+    @Autowired
+    private final PatentRelationService patentRelationService;
+
+    //마인드맵 저장 Api
     @PostMapping("/api/auth/saveMindMap")
     public ResponseDto<?> createMindMap(@RequestBody MindMapEntityDto requestBody) throws JsonProcessingException {
-        //Object jsonString = requestBody; // JSON 데이터
-        System.out.println(requestBody);
         ObjectMapper mapper = new ObjectMapper();
-
+        System.out.println("마인드맵 저장APi" + requestBody);
         String jsonString = mapper.writeValueAsString(requestBody);
         JsonNode rootNode = mapper.readTree(jsonString);
 
@@ -55,7 +57,6 @@ public class MindMapApiController {
             dto.setMindMapEntity((MindMapEntity) mindMap.getData());
             mindMapNodes.add(dto);
         }
-        System.out.println("마인드맵 노드 분리: " + mindMapNodes);
 
         // minMapEdge 파싱
         List<MindMapEdgeDto> mindMapEdges = new ArrayList<>();
@@ -70,19 +71,15 @@ public class MindMapApiController {
             mindMapEdges.add(dto);
         }
 
-        System.out.println("마인드맵 엣지 분리: " + mindMapEdges);
-
         //노드 리스트 분리
         for (MindMapNodeDto mindNode : mindMapNodes)
         {
             mindMapNodeService.createNode(mindNode);
-            System.out.println(mindNode);
         }
         //엣지 리스트 분리
         for (MindMapEdgeDto mindEdge : mindMapEdges)
         {
             mindMapEdgeService.createEdge(mindEdge);
-            System.out.println(mindEdge);
         }
 
         return mindMap;
@@ -90,9 +87,22 @@ public class MindMapApiController {
 
     @PostMapping("/api/auth/saveSentence")
     public ResponseDto<?> saveSentence(@RequestBody MakeSentenceDto requestBody) throws JsonProcessingException {
-        ResponseDto<?> result = makeSentenceService.saveSentence(requestBody);
+        ObjectMapper mapper = new ObjectMapper();
         System.out.println(requestBody);
-        System.out.println(requestBody.getClass().getName());
-        return result;
+        String jsonString = mapper.writeValueAsString(requestBody);
+        JsonNode rootNode = mapper.readTree(jsonString);
+
+
+        ResponseDto<?> makeSentence = makeSentenceService.saveSentence(requestBody);
+
+        // patentReation 파싱
+        List<String> patentRelationList = requestBody.getPatentRelation();
+        for (String patentSentence : patentRelationList){
+            PatentRelationDto dto = new PatentRelationDto();
+            dto.setPatentSentence(patentSentence);
+            dto.setMakeSentenceEntity((MakeSentenceEntity) makeSentence.getData());
+            patentRelationService.saveSentence(dto);
+        }
+        return makeSentence;
     }
 }

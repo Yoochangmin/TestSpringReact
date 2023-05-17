@@ -1,12 +1,14 @@
-package jpabook.springjpashop.dto;
+package jpabook.springjpashop.dto.MakeSentence;
 
 
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
+import jpabook.springjpashop.Entity.MakeSentence.PatentRelation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,10 +25,9 @@ public class MakeSentenceDto {
 
     private byte show;
 
+    private List<String> patentRelation;
 
-
-
-    private MindMapEntity mindMapEntity;
+//    private MindMapEntity mindMapEntity;
 
 
 }

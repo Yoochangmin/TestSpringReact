@@ -1,10 +1,10 @@
 package jpabook.springjpashop.controller;
 
+import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
-import jpabook.springjpashop.repository.MindMapEdgeRepository;
-import jpabook.springjpashop.repository.MindMapNodeRepository;
-import jpabook.springjpashop.repository.MindMapNodeJpaRepository;
-import jpabook.springjpashop.repository.MindMapRepository;
+import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
+import jpabook.springjpashop.dto.ResponseDto;
+import jpabook.springjpashop.repository.*;
 import jpabook.springjpashop.service.MindMapNodeService;
 import jpabook.springjpashop.service.MindMapService;
 import lombok.RequiredArgsConstructor;
@@ -33,44 +33,37 @@ public class MindMapController {
     @Autowired
     private final MindMapNodeService mindMapNodeService;
     @Autowired
+    private final MindMapEdgeJpaRepository mindMapEdgeJpaRepository;
+    @Autowired
     private final MindMapEdgeRepository mindMapEdgeRepository;
 
-    //마인드맵 전체 조회 api
-//    @GetMapping("/api/auth/allMindMap")
-//    public List<MindMapResponseDto> mindMapList(@PathVariable ) {
-//        List<MindMapResponseDto> mindMap = mindMapRepository.findAll();
-//        List<MindMapResponseDto> result = mindMap.stream()
-//                .map(o -> new MindMapResponseDto())
-//                .collect(toList());
-//        return result;
-//    }
-
-    //마인드맵 조건 조회
-//    @GetMapping("api/auth/mindMapList{minaMapId}")
-//    public List<MindMapNode> getNodesByMindMapId(@PathVariable Long mindmapId) {
-//        return (List<MindMapNode>) mindMapService.getNodesAndEdgesByMindMapId(mindmapId);
-//    }
-
-    //마인드맵 전체 조회
+    //MindMapPk값 출력
     @GetMapping("/api/auth/mindMapAllList")
-    public List<Long> getMindMapList() {
-
+    public List<Long> getMindMapId() {
         return mindMapRepository.findAllIds();
     }
 
-    //마인드맵 노드 조회
-    @GetMapping("/api/auth/nodes")
-    public ResponseEntity<?> getNodes(@PathVariable Long Id) {
-        List<MindMapNode> list = mindMapNodeJpaRepository.findByMindMapEntity_Id(1L);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-
-
     @GetMapping("/api/auth/node")
     public ResponseEntity<?> getNodeData() {
-        List<MindMapNode> list = mindMapNodeRepository.findByMindMapId(1L);
+        List<MindMapNode> list = mindMapNodeRepository.findByNodes(1L);
         System.out.println(list);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+    @GetMapping("/api/auth/edge")
+    public ResponseEntity<?> getEdgeData() {
+        List<MindMapEdge> list = mindMapEdgeRepository.findByEdges(1L);
+        System.out.println(list);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    //마인드맵 전체 조회
+    @GetMapping("/api/auth/mindMap")
+    public ResponseDto<?> getAllMindMapData() {
+        ResponseDto<?> result = mindMapService.getAllMindMapData();
+        System.out.println(result);
+        return result;
+    }
+
+
 
 }

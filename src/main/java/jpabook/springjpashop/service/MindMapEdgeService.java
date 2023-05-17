@@ -4,19 +4,17 @@ import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
 import jpabook.springjpashop.dto.ResponseDto;
-import jpabook.springjpashop.repository.MindMapEdgeRepository;
+import jpabook.springjpashop.repository.MindMapEdgeJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.validation.constraints.Min;
 
 
 @Service
 @RequiredArgsConstructor
 public class MindMapEdgeService {
     @Autowired
-    private final MindMapEdgeRepository mindMapEdgeRepository;
+    private final MindMapEdgeJpaRepository mindMapEdgeJpaRepository;
 
 
     public ResponseDto<?> createEdge(MindMapEdgeDto dto){
@@ -26,7 +24,7 @@ public class MindMapEdgeService {
         MindMapEntity mindMapEntity =dto.getMindMapEntity();
         MindMapEdge mindMapEdge = new MindMapEdge(dto);
         try {
-            mindMapEdgeRepository.save(mindMapEdge);
+            mindMapEdgeJpaRepository.save(mindMapEdge);
         }catch (Exception e){
             return ResponseDto.setFailed("Edges Save Faild");
         }

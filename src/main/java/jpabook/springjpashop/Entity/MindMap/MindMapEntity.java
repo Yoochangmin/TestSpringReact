@@ -31,8 +31,6 @@ public class MindMapEntity {
 //    @OneToOne(mappedBy = "mindMapEntity", fetch = FetchType.LAZY)
 //    private MindRelationEntity mindRelationEntity;
 
-//    @OneToOne(mappedBy = "mindMapEntity", fetch = FetchType.LAZY)
-//    private MemberLikeEntity memberLikeEntity;
 
     public MindMapEntity(MindMapEntityDto dto){
         this.highestWord = dto.getHighestWord();

@@ -1,8 +1,7 @@
-package jpabook.springjpashop.Entity;
+package jpabook.springjpashop.Entity.MakeSentence;
 
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
-import jpabook.springjpashop.dto.MakeSentenceDto;
-import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
+import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,8 +42,8 @@ public class MakeSentenceEntity {
     @JoinColumn(name = "mind_map_id")
     private MindMapEntity mindMapEntity;
 
-    @OneToOne(mappedBy = "makeSentenceEntity")
-    private PatentRelationEntity patentRelationEntity;
+    @OneToMany(mappedBy = "makeSentenceEntity")
+    private List<PatentRelation> patentRelation;
 
 
     public MakeSentenceEntity(MakeSentenceDto dto){
@@ -53,7 +51,7 @@ public class MakeSentenceEntity {
         this.combineWord1 = dto.getCombineWord1();
         this.combineWord2 = dto.getCombineWord2();
         this.publicationDate = dto.getPublicationDate();
+        this.starRating =dto.getStarRating();
         this.show = dto.getShow();
-        this.mindMapEntity = dto.getMindMapEntity();
     }
 }

@@ -42,6 +42,7 @@ public class JwtAuthencationFilter extends OncePerRequestFilter {
                     AbstractAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(userId, null , AuthorityUtils.NO_AUTHORITIES);
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    System.out.println("스프링 세큐리티" + authentication);
 
                     // SecurityContext에 AbstractAuthenticationToken 객체를 추가해서
                     // 해당 Thread가 지속적으로 인증 정보를 가질 수 있도록 해줌

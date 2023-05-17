@@ -1,6 +1,8 @@
-package jpabook.springjpashop.Entity;
+package jpabook.springjpashop.Entity.MakeSentence;
 
 
+import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
+import jpabook.springjpashop.dto.MakeSentence.PatentRelationDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +16,7 @@ import javax.persistence.*;
 @Data
 @Entity(name = "PatentRelation")
 @Table(name = "PatentRelation")
-public class PatentRelationEntity {
+public class PatentRelation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="patent_relation_id")
@@ -22,7 +24,11 @@ public class PatentRelationEntity {
 
     @Column(name = "patent_sentence")
     private String patentSentence;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "make_sentence_id")
     private MakeSentenceEntity makeSentenceEntity;
+
+    public PatentRelation(PatentRelationDto dto){
+        this.patentSentence = dto.getPatentSentence();
+    }
 }

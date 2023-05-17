@@ -24,6 +24,8 @@ public class MemberService {
     private final MemberJpaRepository memberJpaRepository;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    private ResponseDto<SignInResponseDto> signInResult;
+
     //회원가입
     public ResponseDto<?> signUp(MemberDto dto){
         String userId = dto.getUserId();
@@ -68,15 +70,12 @@ public class MemberService {
         String userId = dto.getUserId();  // 유저 아이디 값
         String userPassword = dto.getUserPassword(); // 유저 비밀번호 값
 
-        System.out.println("유저정보 검색" + dto);
         MemberEntity memberEntity = null;
         try {
             memberEntity = memberJpaRepository.findByUserId(userId);
-            System.out.println(memberEntity);
             //아이디가 틀릴 경우
             if (memberEntity == null) return ResponseDto.setFailed("Sign In Failed : Id is not consist");
             //비밀번호가 틀릴 경우
-            System.out.println("비밀번호" + userPassword + "다른" + memberEntity.getUserPassword());
             if (!passwordEncoder.matches(userPassword, memberEntity.getUserPassword()))
                 return ResponseDto.setFailed("Sign In Failed  : PW is not consist");
         } catch (Exception error) {
@@ -86,12 +85,21 @@ public class MemberService {
         memberEntity.setUserPassword("");
 
         String token = tokenProvider.create(userId);
+
+        // 로그인 인증을 저장합니다.
+
+
         int exprTime = 3600000;
 
         SignInResponseDto signInResponseDto = new SignInResponseDto(token, exprTime, memberEntity);
         return ResponseDto.setSuccess("Sign In success", signInResponseDto);
     }
 
+    public MemberEntity processResult(ResponseDto<SignInResponseDto> result) {
+        MemberEntity member = result.getData().getMember();
+        System.out.println("member저장 확인" +member);
+        return member;
+    }
 
 
 //    //회원 전체 조회
