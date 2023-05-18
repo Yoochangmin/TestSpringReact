@@ -31,12 +31,14 @@ public class MakeSentenceEntity {
     private String combineWord1;
     private String combineWord2;
 
-    private byte starRating;
+    private byte totalStarRating;
+    private byte memberStarRating;
 
     private byte show;
 
     @Temporal(TemporalType.DATE)
-    Date publicationDate;
+    private Date publicationDate;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mind_map_id")
@@ -51,7 +53,8 @@ public class MakeSentenceEntity {
         this.combineWord1 = dto.getCombineWord1();
         this.combineWord2 = dto.getCombineWord2();
         this.publicationDate = dto.getPublicationDate();
-        this.starRating =dto.getStarRating();
+        this.totalStarRating= dto.getTotalStarRating();
+        this.memberStarRating=dto.getMemberStarRating();
         this.show = dto.getShow();
     }
 }

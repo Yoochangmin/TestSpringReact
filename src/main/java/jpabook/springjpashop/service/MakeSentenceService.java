@@ -8,6 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 public class MakeSentenceService {
@@ -19,7 +24,10 @@ public class MakeSentenceService {
     public ResponseDto<?> saveSentence(MakeSentenceDto dto) {
         String Word1 = dto.getCombineWord1();
 
+        //가입 날짜 시간
+
         MakeSentenceEntity makeSentenceEntity = new MakeSentenceEntity(dto);
+//        makeSentenceEntity.setPublicationDate(Date);
 
         //데이터 베이스에 sentence 저장
         try {
