@@ -1,5 +1,6 @@
 package jpabook.springjpashop.dto;
 
+import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class MemberStarDto {
 
     private byte starRating;
-    private MindMapEntity mindMapEntity;
+    private MakeSentenceEntity makeSentenceEntity;
 
     private MemberEntity memberEntity;
 

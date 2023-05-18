@@ -1,5 +1,6 @@
 package jpabook.springjpashop.Entity;
 
+import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +23,8 @@ public class MemberStar {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "mind_map_id")
-    private MindMapEntity mindMapEntity;
+    @JoinColumn(name = "sentence_id")
+    private MakeSentenceEntity makeSentenceEntity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
