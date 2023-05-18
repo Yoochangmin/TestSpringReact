@@ -39,8 +39,8 @@ public class MindMapTests {
         mindMapEdge.setTarget("1");
 
         MindMapEntity mindMapEntity = new MindMapEntity();
-        mindMapEntity.setMindMapNode(mindMapNode);
-        mindMapEntity.setMindMapEdge(mindMapEdge);
+//        mindMapEntity.setMindMapNode(mindMapNode);
+//        mindMapEntity.setMindMapEdge(mindMapEdge);
 
         em.persist(mindMapEntity);
     }
