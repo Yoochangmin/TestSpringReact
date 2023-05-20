@@ -33,7 +33,6 @@ public class MakeSentenceController {
     @GetMapping("/api/auth/makeSentence/{id}")
     public MakeSentenceEntity getSentence(@PathVariable Long id) {
 
-
         Optional<MakeSentenceEntity> result = this.makeSentenceRepository.findById(id);
 
         if (result.isPresent()) {
@@ -59,7 +58,7 @@ public class MakeSentenceController {
     }
 
     @PostMapping("/api/auth/makeSentence")
-    public ResponseDto<?> makeSentence(@RequestBody @Valid MakeSentenceDto dto) {
+    public ResponseDto<?> makeSentence(@RequestBody MakeSentenceDto dto) {
         ResponseDto<?> result = makeSentenceService.saveSentence(dto);
         return result;
     }
