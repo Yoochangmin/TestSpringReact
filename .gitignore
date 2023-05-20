@@ -44,3 +44,4 @@ gradlew.bat
 gradlew
 gradlew.bat
 gradlew
+src/main/resources/application.yml
