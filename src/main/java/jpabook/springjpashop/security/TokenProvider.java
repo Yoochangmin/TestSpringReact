@@ -31,8 +31,8 @@ public class TokenProvider {
         headers.put("alg","HS512");
         headers.put("typ", "JWT");
 
-        //만료 날짜를 현재 날짜 + 1시간 설정
-        Date exprTime = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
+        //만료 날짜를 현재 날짜 + 24시간 설정
+        Date exprTime = Date.from(Instant.now().plus(24, ChronoUnit.HOURS));
         //JWT 생성
         return Jwts.builder()
                 .setHeader(headers)

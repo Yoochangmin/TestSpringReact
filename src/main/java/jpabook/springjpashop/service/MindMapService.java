@@ -15,10 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -49,7 +46,7 @@ public class MindMapService{
         String userId = authentication.getName();
         memberEntity = memberJpaRepository.findByUserId(userId);
         System.out.println("인증된멤버정보:" + memberEntity);
-//
+
         if (memberEntity == null) {
             return ResponseDto.setFailed("Member not found");
         }
@@ -57,10 +54,9 @@ public class MindMapService{
         MindMapEntity mindMapEntity = new MindMapEntity(dto);
         mindMapEntity.setMemberEntity(memberEntity);
 
-        // 데이터베이스에 mindMap 저장
+//         데이터베이스에 mindMap 저장
         try {
             mindMapRepository.save(mindMapEntity);
-            System.out.println("로그인한 사용자 정보 "+ userId);
         } catch (Exception e) {
             return ResponseDto.setFailed("Save Failed!");
         }
@@ -81,7 +77,9 @@ public class MindMapService{
 
         return ResponseDto.setSuccess("MindMapInforMation is sucess", mindMapData);
     }
-    public ResponseDto<?> getMyMindMaptData() {
+
+    //마인드맵 개인 조회
+    public ResponseDto<?> getMyMindMapData() {
         List<List<?>> mindMapData = new ArrayList<>();
         //인증된 회원정보
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -89,7 +87,7 @@ public class MindMapService{
         MemberEntity memberEntity = memberJpaRepository.findByUserId(userId);
         Long memberId = memberEntity.getId();
         //인증된 회원의 마인드맵
-        System.out.println("마인드맵 엔티티정보"+ mindMapRepository.findById(memberId).orElse(null));
+        System.out.println("마인드맵 엔티티정보"+ mindMapRepository.findById(1L).orElse(null));
 
         List<Long> mindMapId = mindMapRepository.findMindMapIdsByMemberId(memberId);
 
@@ -104,6 +102,22 @@ public class MindMapService{
             }
         return ResponseDto.setSuccess("마인드맵 정보 조회 성공", mindMapData);
     }
+
+    //마인드맵 검색 조회
+    public ResponseDto<?> getSearchMindMapData(Long mindMapNum) {
+        List<List<?>> mindMapData = new ArrayList<>();
+
+        Optional<MindMapEntity> mindMapId = mindMapRepository.findById(mindMapNum);
+
+            List<MindMapNode> nodeData = mindMapNodeRepository.findByNode(mindMapId);
+            List<MindMapEdge> edgeData = mindMapEdgeRepository.findByEdge(mindMapId);
+
+            mindMapData.add(nodeData);
+            mindMapData.add(edgeData);
+
+        return ResponseDto.setSuccess("마인드맵 정보 조회 성공",  mindMapData);
+    }
+
 
     }
 

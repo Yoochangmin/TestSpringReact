@@ -11,13 +11,14 @@ import java.util.Optional;
 
 @Repository
 public interface MindMapRepository extends JpaRepository<MindMapEntity, Long> {
-    List<MindMapEntity> findAll();
+    public List<MindMapEntity> findAll();
     @Query("SELECT m.id FROM MindMap m")
-    List<Long> findAllIds();
+    public List<Long> findAllIds();
 
     @Query("SELECT m.id FROM MindMap m WHERE m.memberEntity.id = :memberId")
-    List<Long> findMindMapIdsByMemberId(@Param("memberId") Long memberId);
+    public List<Long> findMindMapIdsByMemberId(@Param("memberId") Long memberId);
 
-    Optional<MindMapEntity> findById(Long memberId);
+    public Optional<MindMapEntity> findById(Long memberId);
 
+//    public List<MindMapEntity> findByMindMapTitleContains(Long mindMapTitle);
 }

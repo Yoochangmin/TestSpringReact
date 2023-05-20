@@ -28,7 +28,7 @@ public class MakeSentenceDto {
 
     private List<String> patentRelation;
 
-    private MindMapEntity mindMapEntity;
+//    private MindMapEntity mindMapEntity;
 
 
 }

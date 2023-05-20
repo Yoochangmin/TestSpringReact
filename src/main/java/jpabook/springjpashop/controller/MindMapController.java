@@ -69,27 +69,22 @@ public class MindMapController {
     //마인드맵 개인 조회
     @GetMapping("/mindMap")
     public ResponseDto<?> getMyMindMapData() {
-        ResponseDto<?> result = mindMapService.getMyMindMaptData();
+        ResponseDto<?> result = mindMapService.getMyMindMapData();
         System.out.println(result);
         return result;
     }
 
 
 
-
-
-
-
-
-
-
     //Sql SELET * FROM MindMap Where node_title LIKE %?%;
     //findByBoadTitleContains(String boardTitle);
-//    @GetMapping("api/auth/minMap/search/{mindMapTitle}")
-//    public ResponseDto<List<MindMapEntity>> getSearchList(@PathVariable("title") )
-//    {
-//        return null;
-//    }
+    @GetMapping("api/auth/minMap/search/{mindMapNum}")
+    public ResponseDto<List<MindMapEntity>> getSearchList(@PathVariable("title") Long mindMapNum)
+    {
+//        ResponseDto<?> result = mindMapService.getSearchMindMapData();
+
+        return null;
+    }
 
 
 }
