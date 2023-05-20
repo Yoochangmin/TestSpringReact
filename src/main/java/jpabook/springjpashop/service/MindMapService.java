@@ -1,5 +1,6 @@
 package jpabook.springjpashop.service;
 
+import jpabook.springjpashop.Entity.MakeSentence.PatentRelation;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
@@ -41,18 +42,21 @@ public class MindMapService{
 
     public ResponseDto<?> createMindMap(MindMapEntityDto dto) {
         MemberEntity memberEntity = null;
+        Long id ;
         // 로그인한 사용자 정보 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         memberEntity = memberJpaRepository.findByUserId(userId);
         System.out.println("인증된멤버정보:" + memberEntity);
 
+        id = memberEntity.getId();
+
         if (memberEntity == null) {
             return ResponseDto.setFailed("Member not found");
         }
 
         MindMapEntity mindMapEntity = new MindMapEntity(dto);
-        mindMapEntity.setMemberEntity(memberEntity);
+//        mindMapEntity.setMemberEntity(id);
 
 //         데이터베이스에 mindMap 저장
         try {
@@ -104,20 +108,17 @@ public class MindMapService{
     }
 
     //마인드맵 검색 조회
-    public ResponseDto<?> getSearchMindMapData(Long mindMapNum) {
+    public ResponseDto<?> getSearchMindMapData(Long id) {
         List<List<?>> mindMapData = new ArrayList<>();
 
-        Optional<MindMapEntity> mindMapId = mindMapRepository.findById(mindMapNum);
-
-            List<MindMapNode> nodeData = mindMapNodeRepository.findByNode(mindMapId);
-            List<MindMapEdge> edgeData = mindMapEdgeRepository.findByEdge(mindMapId);
+            List<MindMapNode> nodeData = mindMapNodeRepository.findByNodes(id);
+            List<MindMapEdge> edgeData = mindMapEdgeRepository.findByEdges(id);
 
             mindMapData.add(nodeData);
             mindMapData.add(edgeData);
 
         return ResponseDto.setSuccess("마인드맵 정보 조회 성공",  mindMapData);
     }
-
 
     }
 
