@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PatentController {
 
-    @Autowired
-    private final PatentRelationService patentRelationService
-    //마인드맵 개인 조회
-    @GetMapping("/patentList")
-    public ResponseDto<?> getPatentList() {
-        ResponseDto<?> result = patentRelationService.getPatentList();
-        System.out.println(result);
-        return result;
-    }
+//    @Autowired
+//    private final PatentRelationService patentRelationService
+//    //마인드맵 개인 조회
+//    @GetMapping("/patentList")
+//    public ResponseDto<?> getPatentList() {
+//        ResponseDto<?> result = patentRelationService.getPatentList();
+//        System.out.println(result);
+//        return result;
+//    }
 }

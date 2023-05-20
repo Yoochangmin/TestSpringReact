@@ -16,7 +16,7 @@ public class WordRelationService {
     @Autowired
     private final WordRelationRepository wordRelationRepository;
 
-    public ResponseDto<WordRelationDto> saveWord(WordRelationDto dto){
+    public ResponseDto<WordRelationEntity> saveWord(WordRelationDto dto){
 
         WordRelationEntity wordRelationEntity = new WordRelationEntity(dto);
         //데이터베이스에 word 저장
@@ -25,6 +25,6 @@ public class WordRelationService {
         }catch (Exception e){
             return ResponseDto.setFailed("Word Save Faild!");
         }
-        return ResponseDto.setSuccess("Save Success!", dto);
+        return ResponseDto.setSuccess("Save Success!", wordRelationEntity);
     }
 }

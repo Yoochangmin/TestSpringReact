@@ -5,6 +5,7 @@ import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import jpabook.springjpashop.repository.MindMapRepository;
+import jpabook.springjpashop.repository.WordRelationRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +23,16 @@ public class MindMapTests {
     @Autowired
     MindMapRepository mindMapRepository;
 
+    @Autowired
+    WordRelationRepository wordRelationRepository;
     @PersistenceContext
     EntityManager em;
 
     @Test
     public void mapping(){
-        MindMapNode mindMapNode =new MindMapNode();
-        MindMapEdge mindMapEdge = new MindMapEdge();
 
-        mindMapNode.setId("1");
-        mindMapNode.setLabel("선풍기");
-        mindMapNode.setType("level1");
+        System.out.println(wordRelationRepository.findByRootWord("개"));
 
-        mindMapEdge.setId("1->2");
-        mindMapEdge.setSource("2");
-        mindMapEdge.setTarget("1");
-
-        MindMapEntity mindMapEntity = new MindMapEntity();
-//        mindMapEntity.setMindMapNode(mindMapNode);
-//        mindMapEntity.setMindMapEdge(mindMapEdge);
-
-        em.persist(mindMapEntity);
     }
 
 }
