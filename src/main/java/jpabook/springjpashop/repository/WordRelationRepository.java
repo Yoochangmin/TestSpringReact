@@ -1,9 +1,9 @@
 package jpabook.springjpashop.repository;
 
-import jpabook.springjpashop.Entity.MemberStarEntity;
+import jpabook.springjpashop.Entity.WordRelationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MemberStarJpaRepository extends JpaRepository<MemberStarEntity,Long> {
+public interface WordRelationRepository extends JpaRepository<WordRelationEntity, Long> {
 }

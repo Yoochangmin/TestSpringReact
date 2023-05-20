@@ -1,6 +1,7 @@
 package jpabook.springjpashop.controller;
 
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
+import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
 import jpabook.springjpashop.dto.ResponseDto;
@@ -64,6 +65,21 @@ public class MindMapController {
         return result;
     }
 
+    //마인드맵 개인 조회
+    @GetMapping("/mindMap")
+    public ResponseDto<?> getMyMindMapData() {
+        ResponseDto<?> result = mindMapService.getMyMindMaptData();
+        System.out.println(result);
+        return result;
+    }
+
+    //Sql SELET * FROM MindMap Where node_title LIKE %?%;
+    //findByBoadTitleContains(String boardTitle);
+//    @GetMapping("api/auth/minMap/search/{mindMapTitle}")
+//    public ResponseDto<List<MindMapEntity>> getSearchList(@PathVariable("title") )
+//    {
+//        return null;
+//    }
 
 
 }

@@ -1,5 +1,6 @@
 package jpabook.springjpashop.Entity.MakeSentence;
 
+import jpabook.springjpashop.Entity.MemberStarEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public class MakeSentenceEntity {
     private String combineWord2;
 
     private byte totalStarRating;
-    private byte memberStarRating;
+
 
     private byte show;
 
@@ -54,7 +55,6 @@ public class MakeSentenceEntity {
         this.combineWord2 = dto.getCombineWord2();
         this.publicationDate = dto.getPublicationDate();
         this.totalStarRating= dto.getTotalStarRating();
-        this.memberStarRating=dto.getMemberStarRating();
         this.show = dto.getShow();
     }
 }

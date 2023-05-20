@@ -10,13 +10,17 @@ import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
 import jpabook.springjpashop.dto.MakeSentence.PatentRelationDto;
 import jpabook.springjpashop.dto.ResponseDto;
+import jpabook.springjpashop.dto.WordRelationDto;
+import jpabook.springjpashop.repository.WordRelationRepository;
 import jpabook.springjpashop.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,10 @@ import java.util.List;
 public class MindMapApiController {
     @Autowired
     private final MindMapService mindMapService;
+    @Autowired
+    private final WordRelationService wordRelationService;
+    @Autowired
+    private final MemberService memberService;
     @Autowired
     private final MindMapNodeService mindMapNodeService;
     @Autowired
@@ -36,15 +44,14 @@ public class MindMapApiController {
     private final PatentRelationService patentRelationService;
 
     //마인드맵 저장 Api
-    @PostMapping("/api/auth/saveMindMap")
+    @PostMapping(value = "/api/auth/saveMindMap")
     public ResponseDto<?> createMindMap(@RequestBody MindMapEntityDto requestBody) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println("마인드맵 저장APi" + requestBody);
         String jsonString = mapper.writeValueAsString(requestBody);
         JsonNode rootNode = mapper.readTree(jsonString);
 
         ResponseDto<?> mindMap = mindMapService.createMindMap(requestBody);
-
+        System.out.println("마인드맵정보 " + mindMap);
 
         // mindMapNode 파싱
         List<MindMapNodeDto> mindMapNodes = new ArrayList<>();
@@ -106,4 +113,13 @@ public class MindMapApiController {
         }
         return makeSentence;
     }
-}
+
+
+    //WordRelation 생성
+    @PostMapping("/api/auth/saveWord")
+    public ResponseDto<?> saveSentence(@RequestBody WordRelationDto requestBody){
+            ResponseDto<?> result = wordRelationService.saveWord(requestBody);
+            return result;
+        }
+
+    }

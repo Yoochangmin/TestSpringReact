@@ -1,6 +1,7 @@
 package jpabook.springjpashop.Entity;
 
 
+import jpabook.springjpashop.dto.WordRelationDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,4 +24,9 @@ public class WordRelationEntity {
     private String rootWord;
 
     private String word;
+
+    public WordRelationEntity(WordRelationDto dto){
+        this.rootWord = dto.getRootWord();
+        this.word = dto.getWord();
+    }
 }

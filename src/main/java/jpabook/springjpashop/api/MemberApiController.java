@@ -3,20 +3,18 @@ package jpabook.springjpashop.api;
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
-import jpabook.springjpashop.dto.MemberDto;
+import jpabook.springjpashop.dto.*;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
 import jpabook.springjpashop.dto.MindMap.MindMapRequestDto;
-import jpabook.springjpashop.dto.ResponseDto;
-import jpabook.springjpashop.dto.SignInDto;
-import jpabook.springjpashop.dto.SignInResponseDto;
 import jpabook.springjpashop.service.MemberService;
 import jpabook.springjpashop.service.MindMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,12 +44,15 @@ public class MemberApiController {
             // 인증 객체 설정
             Authentication authentication = new UsernamePasswordAuthenticationToken(requestBody.getUserId(), null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("인증이 됬으면 출력" + authentication);
         }
         return result;
     }
 
-    //
+    //유저 Entity 가져옴
+    @PatchMapping("/api/member")
+    public ResponseDto<PatchMemberResponseDto> patchMember(@RequestBody MemberDto requestBody, @AuthenticationPrincipal Long memberId){
+        return null;
+    }
 
 
 }

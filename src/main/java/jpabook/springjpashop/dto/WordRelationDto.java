@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class WordRelationDto {
     private Long id;
+    private String rootWord;
 
-    private String string;
+    private String word;
 }

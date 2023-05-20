@@ -21,6 +21,5 @@ public class MindMapEntityDto {
     private String highestWord;
 
     private MemberEntity memberEntity;
-    private MakeSentenceEntity makeSentenceEntity;
 
 }

@@ -1,17 +1,21 @@
 package jpabook.springjpashop.service;
 
 import jpabook.springjpashop.Entity.MemberEntity;
-import jpabook.springjpashop.dto.MemberDto;
-import jpabook.springjpashop.dto.ResponseDto;
-import jpabook.springjpashop.dto.SignInDto;
-import jpabook.springjpashop.dto.SignInResponseDto;
+import jpabook.springjpashop.dto.*;
 import jpabook.springjpashop.repository.MemberJpaRepository;
 import jpabook.springjpashop.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -97,8 +101,29 @@ public class MemberService {
 
     public MemberEntity processResult(ResponseDto<SignInResponseDto> result) {
         MemberEntity member = result.getData().getMember();
-        System.out.println("member저장 확인" +member);
         return member;
+    }
+    // 현재 인증된 사용자 정보 가져오기
+    public UserDetails getAuthenticatedUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication);
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                // 사용자 정보 반환
+                return (UserDetails) principal;
+            }
+        }
+        return null;
+    }
+
+    //현재 인증된 memberEntity 가져오기
+    public MemberEntity getMemberEntity(){
+        String userId = String.valueOf(getAuthenticatedUserDetails());
+        MemberEntity memberEntity = memberJpaRepository.findByUserId(userId);
+        return null;
+
+
     }
 
 

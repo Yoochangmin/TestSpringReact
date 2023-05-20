@@ -1,6 +1,5 @@
 package jpabook.springjpashop.Entity.MindMap;
 
-//import jpabook.springjpashop.Entity.MindRelationEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
         import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
         import lombok.*;
@@ -25,13 +24,6 @@ public class MindMapEntity {
     @JoinColumn(name = "member_id" )
     private MemberEntity memberEntity;
 
-//    @OneToMany(mappedBy = "mindMapEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<MakeSentenceEntity> makeSentenceEntityList = new ArrayList<>();
-
-//    @OneToOne(mappedBy = "mindMapEntity", fetch = FetchType.LAZY)
-//    private MindRelationEntity mindRelationEntity;
-
-
     public MindMapEntity(MindMapEntityDto dto){
         this.highestWord = dto.getHighestWord();
     }
@@ -49,12 +41,6 @@ public class MindMapEntity {
         mindRelation.setMindMap(this);
     }
 **/
-    //== 비즈니스 로직 ==//
-
-
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "mind_map_id")
-//    private MindRelationEntity mindRelationEntity;
 
 
 

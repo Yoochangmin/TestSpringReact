@@ -1,7 +1,6 @@
 package jpabook.springjpashop.Entity;
 
 import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
-import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +11,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data @Entity
-public class MemberStar {
+@Data
+@Entity(name = "MemberStar")
+@Table(name = "MemberStar")
+public class MemberStarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="member_star_id")

@@ -26,11 +26,4 @@ public class testController {
         // setter, getter, toString 메서드
     }
 
-    //마인드맵 전체 조회
-    @GetMapping("/api/auth/mindMapTest")
-    public ResponseDto<?> getAllMindMapData() {
-        ResponseDto<?> result =mindMapService.getAllTestData();
-        System.out.println(result);
-        return result;
-    }
 }
