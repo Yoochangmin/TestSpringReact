@@ -22,7 +22,6 @@ public class MakeSentenceDto {
     private Date publicationDate;
 
     private byte totalStarRating;
-    private byte memberStarRating;
 
     private byte show;
 

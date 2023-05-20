@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class MemberStarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="member_star_id")
+    @Column(name ="member_star_id", nullable = true)
     private Long id;
 
     private byte starRating;

@@ -32,7 +32,6 @@ public class MakeSentenceEntity {
     private String combineWord1;
     private String combineWord2;
 
-    private byte totalStarRating;
 
 
     private byte show;
@@ -54,7 +53,6 @@ public class MakeSentenceEntity {
         this.combineWord1 = dto.getCombineWord1();
         this.combineWord2 = dto.getCombineWord2();
         this.publicationDate = dto.getPublicationDate();
-        this.totalStarRating= dto.getTotalStarRating();
         this.show = dto.getShow();
     }
 }

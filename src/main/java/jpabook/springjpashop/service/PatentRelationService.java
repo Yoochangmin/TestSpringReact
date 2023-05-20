@@ -17,6 +17,8 @@ public class PatentRelationService {
     @Autowired
     PatentRelationJpaRepository patentRelationJpaRepository;
 
+
+    //연관단어 저장
     public ResponseDto<?> saveSentence(PatentRelationDto dto){
 
         PatentRelation patentRelation = new PatentRelation(dto);
@@ -28,5 +30,11 @@ public class PatentRelationService {
             return ResponseDto.setFailed("Nodes Save Faild!");
         }
         return ResponseDto.setSuccess("Save Success!", dto);
+    }
+
+    //연관단어 리스트 불러오기
+    private ResponseDto<?> getPatentList(){
+
+        return null;
     }
 }
