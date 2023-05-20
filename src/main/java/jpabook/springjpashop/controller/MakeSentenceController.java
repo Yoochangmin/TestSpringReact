@@ -64,27 +64,4 @@ public class MakeSentenceController {
 
     }
 
-    @PostMapping("/api/auth/makeSentence")
-    public ResponseDto<?> makeSentence(@RequestBody MakeSentenceDto requestBody) throws JsonProcessingException{
-
-        ObjectMapper mapper = new ObjectMapper();
-        System.out.println(requestBody);
-        String jsonString = mapper.writeValueAsString(requestBody);
-        JsonNode rootNode = mapper.readTree(jsonString);
-
-
-        ResponseDto<?> makeSentence = makeSentenceService.saveSentence(requestBody);
-
-        // patentReation 파싱
-        List<String> patentRelationList = requestBody.getPatentRelation();
-        for (String patentSentence : patentRelationList){
-            PatentRelationDto dto = new PatentRelationDto();
-            dto.setPatentSentence(patentSentence);
-            dto.setMakeSentenceEntity((MakeSentenceEntity) makeSentence.getData());
-            System.out.println("TEST 찾기"+ makeSentence.getData());
-            patentRelationService.saveSentence(dto);
-        }
-        return makeSentence;
-    }
-
 }

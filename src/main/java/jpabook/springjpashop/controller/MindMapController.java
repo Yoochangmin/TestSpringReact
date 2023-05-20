@@ -57,6 +57,7 @@ public class MindMapController {
         System.out.println(list);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
     //마인드맵 전체 조회
     @GetMapping("/api/auth/mindMap")
     public ResponseDto<?> getAllMindMapData() {
@@ -72,6 +73,15 @@ public class MindMapController {
         System.out.println(result);
         return result;
     }
+
+
+
+
+
+
+
+
+
 
     //Sql SELET * FROM MindMap Where node_title LIKE %?%;
     //findByBoadTitleContains(String boardTitle);
