@@ -13,6 +13,6 @@ public class WordRelationDto {
 
     private String word;
 
-    private Long value;
+    private Long values;
 
 }
