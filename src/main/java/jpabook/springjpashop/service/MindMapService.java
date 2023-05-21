@@ -53,7 +53,7 @@ public class MindMapService{
         }
 
         MindMapEntity mindMapEntity = new MindMapEntity(dto);
-        mindMapEntity.setId(id);
+        mindMapEntity.setMemberEntity(memberEntity);
 
 //         데이터베이스에 mindMap 저장
         try {

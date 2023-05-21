@@ -1,5 +1,6 @@
 package jpabook.springjpashop.Entity.MindMap;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.springjpashop.Entity.MemberEntity;
         import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
         import lombok.*;
@@ -20,6 +21,7 @@ public class MindMapEntity {
     private long id;
     private String highestWord;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id" )
     private MemberEntity memberEntity;
