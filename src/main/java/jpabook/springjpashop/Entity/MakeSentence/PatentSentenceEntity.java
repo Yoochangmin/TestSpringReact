@@ -1,6 +1,7 @@
 package jpabook.springjpashop.Entity.MakeSentence;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.springjpashop.dto.MakeSentence.PatentSentenceDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +24,9 @@ public class PatentSentenceEntity {
 
     @Column(name = "patent_sentence")
     private String patentSentence;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "make_sentence_id")
     private MakeSentenceEntity makeSentenceEntity;
 

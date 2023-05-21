@@ -44,19 +44,6 @@ public class MindMapController {
         return mindMapRepository.findAllIds();
     }
 
-    @GetMapping("/api/auth/node")
-    public ResponseEntity<?> getNodeData() {
-        List<MindMapNode> list = mindMapNodeRepository.findByNodes(1L);
-        System.out.println(list);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-
-    @GetMapping("/api/auth/edge")
-    public ResponseEntity<?> getEdgeData() {
-        List<MindMapEdge> list = mindMapEdgeRepository.findByEdges(1L);
-        System.out.println(list);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
 
     //마인드맵 전체 조회
     @GetMapping("/api/auth/mindMap")
@@ -78,9 +65,10 @@ public class MindMapController {
 
     //Sql SELET * FROM MindMap Where node_title LIKE %?%;
     //findByBoadTitleContains(String boardTitle);
-    @GetMapping("api/auth/minMap/search/{mindMapNum}")
+    @GetMapping("api/auth/minMap/search/{id}")
     public ResponseDto<?> getSearchList(@PathVariable Long id)
     {
+        System.out.println(id);
         ResponseDto<?> result = mindMapService.getSearchMindMapData(id);
         return result;
     }

@@ -1,7 +1,6 @@
 package jpabook.springjpashop.repository;
 
 
-import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,7 +24,7 @@ public class MindMapNodeRepository {
         return query.getResultList();
     }
 
-    public List<MindMapNode> findByNode(Optional<MindMapEntity> mindMapId) {
+    public List<MindMapNode> findByNode(Long mindMapId) {
         String queryString = "SELECT n FROM MindMapNode n WHERE n.mindMapEntity.id = :mindMapId";
         TypedQuery<MindMapNode> query = em.createQuery(queryString, MindMapNode.class);
         query.setParameter("mindMapId", mindMapId);

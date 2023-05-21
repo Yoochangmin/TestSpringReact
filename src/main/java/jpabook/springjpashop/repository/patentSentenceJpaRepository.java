@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface patentSentenceJpaRepository extends JpaRepository<PatentSentenceEntity, Long> {
+public interface PatentSentenceJpaRepository extends JpaRepository<PatentSentenceEntity, Long> {
 
-     List<PatentSentenceEntity> findByMakeSentenceEntityId(Long makeSentenceId);
 
 }
