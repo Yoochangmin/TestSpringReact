@@ -34,7 +34,7 @@ public class PatentSentenceService {
     //연관단어 리스트 불러오기
     public ResponseDto<?> getPatentList(Long id){
 
-        List<PatentSentenceEntity> patentSentenceEntityList = patentSentenceJpaRepository.findByMakeSentenceId(id);
+        List<PatentSentenceEntity> patentSentenceEntityList = patentSentenceJpaRepository.findByMakeSentenceEntityId(id);
 
         return ResponseDto.setSuccess("Success message", patentSentenceEntityList);
     }

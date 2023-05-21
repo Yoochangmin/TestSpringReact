@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface patentSentenceJpaRepository extends JpaRepository<PatentSentenceEntity, Long> {
 
-     List<PatentSentenceEntity> findByMakeSentenceId(Long makeSentenceId);
+     List<PatentSentenceEntity> findByMakeSentenceEntityId(Long makeSentenceId);
 
 }
