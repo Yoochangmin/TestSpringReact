@@ -28,7 +28,7 @@ public class MemberEntity {
     @Column(name = "user_password")
     private String userPassword;
 
-    @Column(name = "mind_map_id")
+//    @Column(name = "mind_map_id")
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private List<MindMapEntity> mindMap = new ArrayList<>();
 

@@ -39,8 +39,7 @@ public class MakeSentenceEntity {
     private Date publicationDate;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mind_map_id")
+    @OneToOne(mappedBy = "makeSentenceEntity",fetch = FetchType.LAZY)
     private MindMapEntity mindMapEntity;
 
     @OneToMany(mappedBy = "makeSentenceEntity")

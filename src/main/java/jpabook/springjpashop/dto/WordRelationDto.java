@@ -12,4 +12,7 @@ public class WordRelationDto {
     private String rootWord;
 
     private String word;
+
+    private Long value;
+
 }
