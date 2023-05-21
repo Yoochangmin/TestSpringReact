@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PatentSentenceReopsitory {
     private final EntityManager em;
- 
+
     public List<PatentSentenceEntity> findByMakeSentenceId(Long makeSentenceId) {
         String queryString = "select m from PatentSentence m where m.makeSentenceEntity.id = :makeSentenceId";
         TypedQuery<PatentSentenceEntity> query = em.createQuery(queryString, PatentSentenceEntity.class);
