@@ -8,19 +8,16 @@ import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEdgeDto;
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
 import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
-import jpabook.springjpashop.dto.MakeSentence.PatentRelationDto;
+import jpabook.springjpashop.dto.MakeSentence.PatentSentenceDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.dto.WordRelationDto;
-import jpabook.springjpashop.repository.WordRelationRepository;
 import jpabook.springjpashop.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +38,7 @@ public class MindMapApiController {
     private final MindMapEdgeService mindMapEdgeService;
 
     @Autowired
-    private final PatentRelationService patentRelationService;
+    private final PatentSentenceService patentSentenceService;
 
     //마인드맵 저장 Api
     @PostMapping(value = "/api/auth/saveMindMap")
@@ -92,24 +89,24 @@ public class MindMapApiController {
         return mindMap;
     }
 
+    //makeSentence 저장 patentSentence 저장
     @PostMapping("/api/auth/saveSentence")
-    public ResponseDto<?> saveSentence(@RequestBody MakeSentenceDto requestBody) throws JsonProcessingException {
+    public ResponseDto<?> saveSentence(@RequestBody MakeSentenceDto requestDto) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println(requestBody);
-        String jsonString = mapper.writeValueAsString(requestBody);
+        System.out.println(requestDto);
+        String jsonString = mapper.writeValueAsString(requestDto);
         JsonNode rootNode = mapper.readTree(jsonString);
 
-
-        ResponseDto<?> makeSentence = makeSentenceService.saveSentence(requestBody);
+        ResponseDto<?> makeSentence = makeSentenceService.saveSentence(requestDto);
 
         // patentReation 파싱
-        List<String> patentRelationList = requestBody.getPatentRelation();
+        List<String> patentRelationList = requestDto.getPatentSentence();
         for (String patentSentence : patentRelationList){
-            PatentRelationDto dto = new PatentRelationDto();
+            PatentSentenceDto dto = new PatentSentenceDto();
             dto.setPatentSentence(patentSentence);
             dto.setMakeSentenceEntity((MakeSentenceEntity) makeSentence.getData());
             System.out.println("TEST 찾기"+ makeSentence.getData());
-            patentRelationService.saveSentence(dto);
+            patentSentenceService.saveSentence(dto);
         }
         return makeSentence;
     }

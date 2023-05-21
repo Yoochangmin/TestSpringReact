@@ -1,27 +1,12 @@
 package jpabook.springjpashop.controller;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
-import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
-import jpabook.springjpashop.Entity.MindMap.MindMapNode;
-import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
-import jpabook.springjpashop.dto.MakeSentence.PatentRelationDto;
-import jpabook.springjpashop.dto.MemberDto;
-import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
-import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.*;
 import jpabook.springjpashop.service.MakeSentenceService;
-import jpabook.springjpashop.service.MindMapNodeService;
-import jpabook.springjpashop.service.MindMapService;
-import jpabook.springjpashop.service.PatentRelationService;
+import jpabook.springjpashop.service.PatentSentenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +20,7 @@ public class MakeSentenceController {
     @Autowired
     private final MakeSentenceRepository makeSentenceRepository;
 
-    private final PatentRelationService patentRelationService;
+    private final PatentSentenceService patentSentenceService;
     @GetMapping("/api/auth/makeSentence/{id}")
     public MakeSentenceEntity getSentence(@PathVariable Long id) {
 

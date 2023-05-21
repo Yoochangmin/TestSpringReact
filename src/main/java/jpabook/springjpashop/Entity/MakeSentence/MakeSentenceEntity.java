@@ -1,6 +1,5 @@
 package jpabook.springjpashop.Entity.MakeSentence;
 
-import jpabook.springjpashop.Entity.MemberStarEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import lombok.AllArgsConstructor;
@@ -24,7 +23,7 @@ import java.util.List;
 public class MakeSentenceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="sentence_id")
+    @Column(name ="make_sentence_id")
     private Long id;
 
     private String sentence;
@@ -45,7 +44,7 @@ public class MakeSentenceEntity {
     private MindMapEntity mindMapEntity;
 
     @OneToMany(mappedBy = "makeSentenceEntity")
-    private List<PatentRelation> patentRelation;
+    private List<PatentSentenceEntity> patentSentenceEntity;
 
 
     public MakeSentenceEntity(MakeSentenceDto dto){

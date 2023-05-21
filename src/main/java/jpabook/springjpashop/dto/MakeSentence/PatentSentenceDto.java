@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatentRelationDto {
+public class PatentSentenceDto {
     private String patentSentence;
     private MakeSentenceEntity makeSentenceEntity;
 

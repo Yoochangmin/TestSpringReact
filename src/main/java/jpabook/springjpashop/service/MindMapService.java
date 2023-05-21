@@ -1,13 +1,10 @@
 package jpabook.springjpashop.service;
 
-import jpabook.springjpashop.Entity.MakeSentence.PatentRelation;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
 import jpabook.springjpashop.dto.MindMap.MindMapEntityDto;
-import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
-import jpabook.springjpashop.dto.MindMap.MindMapResponseDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +53,7 @@ public class MindMapService{
         }
 
         MindMapEntity mindMapEntity = new MindMapEntity(dto);
-//        mindMapEntity.setMemberEntity(id);
+        mindMapEntity.setId(id);
 
 //         데이터베이스에 mindMap 저장
         try {

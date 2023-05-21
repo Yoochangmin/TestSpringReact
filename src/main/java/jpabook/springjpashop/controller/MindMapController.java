@@ -79,9 +79,9 @@ public class MindMapController {
     //Sql SELET * FROM MindMap Where node_title LIKE %?%;
     //findByBoadTitleContains(String boardTitle);
     @GetMapping("api/auth/minMap/search/{mindMapNum}")
-    public ResponseDto<List<MindMapEntity>> getSearchList(@PathVariable Long id)
+    public ResponseDto<?> getSearchList(@PathVariable Long id)
     {
-        ResponseDto<?> result = this.mindMapService.getSearchMindMapData(id);
+        ResponseDto<?> result = mindMapService.getSearchMindMapData(id);
         return result;
     }
 
