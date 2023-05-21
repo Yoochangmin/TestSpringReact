@@ -31,7 +31,8 @@ public class MindMapTests {
     @Test
     public void mapping(){
 
-        System.out.println(wordRelationRepository.findByRootWord("개"));
+
+
 
     }
 

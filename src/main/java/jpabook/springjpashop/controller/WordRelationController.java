@@ -1,6 +1,7 @@
 package jpabook.springjpashop.controller;
 
 import jpabook.springjpashop.Entity.WordRelationEntity;
+import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.WordRelationRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.javassist.compiler.ast.Variable;
@@ -24,6 +25,15 @@ public class WordRelationController {
 
         return this.wordRelationRepository.findByRootWord(word);
 
+    }
+    @GetMapping("/api/auth/wordRelation/{rootword}/{word}")
+    public boolean CheckWordRelation(@PathVariable String rootword, @PathVariable String word)
+    {
+        List<WordRelationEntity> result = wordRelationRepository.findByRootWordAndWord(rootword, word);
+        if(result.size()<=0)
+            return false;
+        else
+            return true;
     }
 
 

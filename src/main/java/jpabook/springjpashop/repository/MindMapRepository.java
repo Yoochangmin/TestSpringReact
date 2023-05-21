@@ -1,6 +1,7 @@
 package jpabook.springjpashop.repository;
 
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
+import jpabook.springjpashop.Entity.WordRelationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +18,8 @@ public interface MindMapRepository extends JpaRepository<MindMapEntity, Long> {
 
     @Query("SELECT m.id FROM MindMap m WHERE m.memberEntity.id = :memberId")
     List<Long> findMindMapIdsByMemberId(@Param("memberId") Long memberId);
+
+
 
 
 //    public List<MindMapEntity> findByMindMapTitleContains(Long mindMapTitle);

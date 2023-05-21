@@ -25,11 +25,11 @@ public class WordRelationEntity {
 
     private String word;
 
-    private Long value;
+    private Long weight;
 
     public WordRelationEntity(WordRelationDto dto){
         this.rootWord = dto.getRootWord();
         this.word = dto.getWord();
-        this.value = dto.getValue();
+        this.weight = dto.getWeight();
     }
 }
