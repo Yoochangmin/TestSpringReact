@@ -32,12 +32,13 @@ public class TokenProvider {
         headers.put("typ", "JWT");
 
         //만료 날짜를 현재 날짜 + 24시간 설정
-        Date exprTime = Date.from(Instant.now().plus(24, ChronoUnit.HOURS));
+        Date exprTime = Date.from(Instant.now().plus(2, ChronoUnit.HOURS));
         //JWT 생성
         return Jwts.builder()
                 .setHeader(headers)
                 //암호화에 사용될 알고리즘 , 키
                 .signWith(SignatureAlgorithm.HS512, SECURITY_KEY)
+                .setExpiration(Date.from(exprTime.toInstant()))
                 // JWT 제목, 생성일, 만료일 생성
                 .setSubject(userId).setIssuedAt(new Date()).setExpiration(exprTime)
                 // 생성

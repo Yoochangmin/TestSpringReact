@@ -91,23 +91,24 @@ public class MindMapApiController {
 
     //makeSentence 저장 patentSentence 저장
     @PostMapping("/api/auth/saveSentence")
-    public ResponseDto<?> saveSentence(@RequestBody MakeSentenceDto requestDto) throws JsonProcessingException {
+    public ResponseDto<?> saveSentenceTest(@RequestBody MakeSentenceDto requestDto) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println(requestDto);
+        System.out.println("makeSentence데이터 확인"+requestDto);
         String jsonString = mapper.writeValueAsString(requestDto);
         JsonNode rootNode = mapper.readTree(jsonString);
 
         ResponseDto<?> makeSentence = makeSentenceService.saveSentence(requestDto);
+        System.out.println("TEST 찾기"+ makeSentence.getData());
 
         // patentReation 파싱
-        List<String> patentRelationList = requestDto.getPatentSentence();
-        for (String patentSentence : patentRelationList){
+        List<String> patentSentenceList = requestDto.getPatentSentence();
+        for (String patentSentence : patentSentenceList){
             PatentSentenceDto dto = new PatentSentenceDto();
             dto.setPatentSentence(patentSentence);
             dto.setMakeSentenceEntity((MakeSentenceEntity) makeSentence.getData());
-            System.out.println("TEST 찾기"+ makeSentence.getData());
             patentSentenceService.saveSentence(dto);
         }
+
         return makeSentence;
     }
 

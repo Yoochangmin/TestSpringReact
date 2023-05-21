@@ -33,21 +33,24 @@ public class MakeSentenceService {
     private final MakeSentenceEntity makeSentenceEntity;
 
     public ResponseDto<?> saveSentence(MakeSentenceDto dto) {
-        //인증된 회원정보
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();
-        MemberEntity memberEntity = memberJpaRepository.findByUserId(userId);
-        Long memberId = memberEntity.getId();
         //인증된 회원의 마인드맵
+        Long mindMapId = dto.getMindMapEntityId();
+        System.out.println(mindMapId);
 
-        System.out.println("마인드맵 엔티티정보"+ mindMapRepository.findById(memberId).orElse(null));
-
+        MindMapEntity mindMapEntity =mindMapRepository.findById(mindMapId).orElse(null);
+        try {
+            mindMapRepository.findById(mindMapId).orElse(null);
+        }catch (Exception e){
+            return ResponseDto.setFailed("마인드맵 아이디 찾기 실패");
+        }
 
         //가입 날짜 시간
+        System.out.println("마인드맵 Id" + mindMapId);
+        System.out.println();
 
         MakeSentenceEntity makeSentenceEntity = new MakeSentenceEntity(dto);
-        makeSentenceEntity.setMindMapEntity(mindMapRepository.findById(memberId).orElse(null));
-//        makeSentenceEntity.setPublicationDate(Date);
+        makeSentenceEntity.setNowDataTime(LocalDateTime.now());
+        makeSentenceEntity.setMindMapEntity(mindMapEntity);
 
         //데이터 베이스에 sentence 저장
         try {

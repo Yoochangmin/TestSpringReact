@@ -29,8 +29,7 @@ public class MindMapEntity {
 
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "make_sentence_id")
+    @OneToOne(mappedBy = "mindMapEntity",fetch = FetchType.LAZY)
     private MakeSentenceEntity makeSentenceEntity;
 
     public MindMapEntity(MindMapEntityDto dto){
@@ -43,13 +42,11 @@ public class MindMapEntity {
         this.memberEntity=memberEntity;
         memberEntity.getMindMap().add(this);
     }
-/**
- *  연관관계 메소드
-    public void setMindRelation(MindRelation mindRelation){
-        this.mindRelation =mindRelation;
-        mindRelation.setMindMap(this);
-    }
-**/
+ //  연관관계 메소드
+//    public void setMakeSentenceEntity(MakeSentenceEntity makeSentenceEntity){
+//        this.makeSentenceEntity =makeSentenceEntity;
+//        makeSentenceEntity.setMindMapEntity(this);
+//    }
 
 
 

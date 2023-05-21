@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static org.apache.ibatis.ognl.Ognl.getValue;
+
 
 @Service
 @RequiredArgsConstructor
@@ -75,6 +77,9 @@ public class MindMapService{
             mindMapData.add(nodeData);
             mindMapData.add(edgeData);
         }
+        for (List<?> mindMapDatum : mindMapData) {
+            System.out.println("MindMapData 조회" + mindMapDatum);
+        }
 
         return ResponseDto.setSuccess("MindMapInforMation is sucess", mindMapData);
     }
@@ -108,8 +113,16 @@ public class MindMapService{
     public ResponseDto<?> getSearchMindMapData(Long id) {
         List<List<?>> mindMapData = new ArrayList<>();
 
-            List<MindMapNode> nodeData = mindMapNodeRepository.findByNodes(id);
-            List<MindMapEdge> edgeData = mindMapEdgeRepository.findByEdges(id);
+        Optional<MindMapEntity> mindMapEntityId = this.mindMapRepository.findById(id);
+
+        if (mindMapEntityId.isPresent()) {
+            System.out.println( mindMapEntityId.get());
+        } else {
+            System.out.println( "데이터 없음");
+        }
+        Long idx = mindMapEntityId.get().getId();
+        List<MindMapNode> nodeData = mindMapNodeRepository.findByNode(idx);
+        List<MindMapEdge> edgeData = mindMapEdgeRepository.findByEdge(idx);
 
             mindMapData.add(nodeData);
             mindMapData.add(edgeData);

@@ -1,5 +1,6 @@
 package jpabook.springjpashop.Entity.MakeSentence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,25 +34,27 @@ public class MakeSentenceEntity {
     private String combineWord2;
 
 
-
     private byte show;
 
-    @Temporal(TemporalType.DATE)
-    private Date publicationDate;
+    private LocalDateTime nowDataTime;
 
-
-    @OneToOne(mappedBy = "makeSentenceEntity",fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mind_map_id")
     private MindMapEntity mindMapEntity;
 
-    @OneToMany(mappedBy = "makeSentenceEntity")
-    private List<PatentSentenceEntity> patentSentenceEntity;
+//    @OneToMany(mappedBy = "makeSentenceEntity", fetch = FetchType.LAZY)
+//    private List<PatentSentenceEntity> patentSentenceEntity;
 
 
+    // 연관관계 메서드
     public MakeSentenceEntity(MakeSentenceDto dto){
         this.sentence = dto.getSentence();
         this.combineWord1 = dto.getCombineWord1();
         this.combineWord2 = dto.getCombineWord2();
-        this.publicationDate = dto.getPublicationDate();
         this.show = dto.getShow();
     }
+
+
+
 }

@@ -1,6 +1,7 @@
 package jpabook.springjpashop.dto.MakeSentence;
 
 
+import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,15 +18,11 @@ public class MakeSentenceDto {
     private String combineWord1;
     private String combineWord2;
 
-    private Date publicationDate;
-
-    private byte totalStarRating;
 
     private byte show;
 
     private List<String> patentSentence;
 
-//    private MindMapEntity mindMapEntity;
-
+    private Long mindMapEntityId;
 
 }
