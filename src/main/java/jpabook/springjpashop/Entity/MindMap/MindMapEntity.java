@@ -28,9 +28,9 @@ public class MindMapEntity {
     private MemberEntity memberEntity;
 
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "mindMapEntity",fetch = FetchType.LAZY)
-    private MakeSentenceEntity makeSentenceEntity;
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "mindMapEntity",fetch = FetchType.LAZY)
+//    private MakeSentenceEntity makeSentenceEntity;
 
     public MindMapEntity(MindMapEntityDto dto){
         this.highestWord = dto.getHighestWord();
@@ -38,10 +38,10 @@ public class MindMapEntity {
 
     //== 연관관계 매서드 ==//
 
-    public void setMemberEntity(MemberEntity memberEntity){
-        this.memberEntity=memberEntity;
-        memberEntity.getMindMap().add(this);
-    }
+//    public void setMemberEntity(MemberEntity memberEntity){
+//        this.memberEntity=memberEntity;
+//        memberEntity.getMindMap().add(this);
+//    }
  //  연관관계 메소드
 //    public void setMakeSentenceEntity(MakeSentenceEntity makeSentenceEntity){
 //        this.makeSentenceEntity =makeSentenceEntity;

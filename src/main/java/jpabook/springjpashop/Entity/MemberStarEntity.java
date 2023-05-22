@@ -1,6 +1,7 @@
 package jpabook.springjpashop.Entity;
 
 import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
+import jpabook.springjpashop.dto.MemberStarDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,4 +31,8 @@ public class MemberStarEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
+
+    public MemberStarEntity(MemberStarDto dto){
+        this.starRating = dto.getStarRating();
+    }
 }

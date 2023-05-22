@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import jpabook.springjpashop.dto.MakeSentence.PatentSentenceDto;
+import jpabook.springjpashop.dto.MemberStarDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.service.MakeSentenceService;
 import jpabook.springjpashop.service.MemberStarService;
@@ -39,16 +40,21 @@ public class MakeSentenceApiController {
         String jsonString = mapper.writeValueAsString(requestDto);
         JsonNode rootNode = mapper.readTree(jsonString);
 
+
+        //makeSentence 저장
         ResponseDto<?> makeSentence = makeSentenceService.saveSentence(requestDto);
         System.out.println("TEST 찾기"+ makeSentence.getData());
 
-        ResponseDto<?> memberStarSave = memberStarService.saveStar();
-        // patentReation 파싱
+        //makeSentence 객체 데이터
+        MakeSentenceEntity makeSentenceData = (MakeSentenceEntity) makeSentence.getData();
+
+
+        // patentSentence 파싱 및 PatentSentence 저장
         List<String> patentSentenceList = requestDto.getPatentSentence();
         for (String patentSentence : patentSentenceList){
             PatentSentenceDto dto = new PatentSentenceDto();
             dto.setPatentSentence(patentSentence);
-            dto.setMakeSentenceEntity((MakeSentenceEntity) makeSentence.getData());
+            dto.setMakeSentenceEntity(makeSentenceData);
             patentSentenceService.saveSentence(dto);
         }
 

@@ -93,8 +93,6 @@ public class MindMapService{
         MemberEntity memberEntity = memberJpaRepository.findByUserId(userId);
         Long memberId = memberEntity.getId();
         //인증된 회원의 마인드맵
-        System.out.println("마인드맵 엔티티정보"+ mindMapRepository.findById(1L).orElse(null));
-
         List<Long> mindMapId = mindMapRepository.findMindMapIdsByMemberId(memberId);
 
         System.out.println("마인드맵 id" + mindMapId);
