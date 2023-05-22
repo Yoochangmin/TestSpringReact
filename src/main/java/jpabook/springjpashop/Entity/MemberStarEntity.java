@@ -1,5 +1,6 @@
 package jpabook.springjpashop.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.dto.MemberStarDto;
 import lombok.AllArgsConstructor;
@@ -23,16 +24,19 @@ public class MemberStarEntity {
 
     private byte starRating;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sentence_id")
     private MakeSentenceEntity makeSentenceEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
     public MemberStarEntity(MemberStarDto dto){
+        this.memberEntity =dto.getMemberEntity();
         this.starRating = dto.getStarRating();
+        this.makeSentenceEntity =dto.getMakeSentenceEntity();
     }
 }

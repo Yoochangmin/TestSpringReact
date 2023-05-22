@@ -36,8 +36,12 @@ public class MemberStarService {
 
     //MemberStar 생성 및 DB 저장
     public ResponseDto<?> saveStar(MemberStarDto dto) {
-        //makeSentence 객체가져오기
+        MemberEntity memberEntity =dto.getMemberEntity();
+        MakeSentenceEntity makeSentenceEntity = dto.getMakeSentenceEntity();
 
+        //makeSentence 객체가져오기
+        System.out.println("dto 확인용:   " + memberEntity.getClass().getName());
+        System.out.println("dto 확인용:   " + makeSentenceEntity);
 
         MemberStarEntity memberStarEntity = new MemberStarEntity(dto);
         //데이터베이스에 memberStar 저장

@@ -52,15 +52,16 @@ public class MemberStarApiController {
         String userId = authentication.getName();
         System.out.println("인증 회원 정보 찾기" + userId);
         MemberEntity memberEntity = memberJpaRepository.findByUserId(userId);
+        MemberEntity member =(MemberEntity) memberEntity;
 
 
-//        List<PatentSentenceEntity> makeSentenceId = patentSentenceRepository.findByMakeSentenceId(idx);
         //memberStarDto에 값 추가
-        MemberStarDto memberStarDto = new MemberStarDto();
-        memberStarDto.setMakeSentenceEntity(makeSentenceEntity);
-        memberStarDto.setMemberEntity(memberEntity);
+        MemberStarDto dto = new MemberStarDto();
+        dto.setMakeSentenceEntity(makeSentenceEntity);
+        dto.setMemberEntity(member);
+        dto.setStarRating(requestBody.getStarRating());
 
-        ResponseDto<?> result = memberStarService.saveStar(memberStarDto);
+        ResponseDto<?> result = memberStarService.saveStar(dto);
 
         return result;
     }
