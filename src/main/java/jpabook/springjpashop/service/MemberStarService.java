@@ -56,6 +56,8 @@ public class MemberStarService {
 
     //MakeSentenceId에 해당하는 MemberStarTotal 출력
     public ResponseDto<?> getTotalStar(Long id) {
+
+        Long totalRating = 0L;
         //인증된 회원의 마인드맵
 
         Optional<MakeSentenceEntity> makeSentenceEntityOptional = makeSentenceRepository.findById(id);
@@ -67,16 +69,12 @@ public class MemberStarService {
         Long idx = makeSentenceEntityOptional.get().getId();
 
         List<MemberStarEntity> memberStarEntityList = memberStarRepository.findByMakeSentenceId(idx);
-
-        System.out.println(memberStarEntityList);
-
         for (MemberStarEntity starList : memberStarEntityList){
             Byte star = starList.getStarRating();
-            System.out.println("별점 준문장" + starList.getMakeSentenceEntity().getId());
-            System.out.println("별점 준 멤버" + starList.getMemberEntity().getUserId());
+            System.out.println("점수: " + star);
+            totalRating += star;
         }
-
-//        return ResponseDto.setSuccess("StarTotal 정보 조회 성공", memberStarEntityList);
-        return null;
+        System.out.println("별점 총합" + totalRating);
+        return ResponseDto.setSuccess("StarTotal 정보 조회 성공", totalRating);
     }
 }
