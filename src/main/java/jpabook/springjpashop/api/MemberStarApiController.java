@@ -7,6 +7,8 @@ import jpabook.springjpashop.Entity.MakeSentence.PatentSentenceEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import jpabook.springjpashop.dto.MemberStarDto;
+import jpabook.springjpashop.dto.Patch.PatchMemberStarDto;
+import jpabook.springjpashop.dto.Patch.PatchMemberStarResponseDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.MakeSentenceRepository;
 import jpabook.springjpashop.repository.MemberJpaRepository;
@@ -16,11 +18,9 @@ import jpabook.springjpashop.service.PatentSentenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -65,4 +65,14 @@ public class MemberStarApiController {
 
         return result;
     }
+
+    @PatchMapping("/api/auth/patchMemberStar/{makeSentenceId}")
+    public ResponseDto<PatchMemberStarResponseDto> patchMemberStar(@RequestBody PatchMemberStarDto requestBody, @PathVariable Long makeSentenceId, @AuthenticationPrincipal String userId){
+
+        PatchMemberStarDto dto = new PatchMemberStarDto(requestBody.getStarRating());
+
+        ResponseDto<PatchMemberStarResponseDto> result = memberStarService.patchMemberStar(dto,makeSentenceId,userId);
+        return result;
+    }
+
 }

@@ -4,6 +4,9 @@ import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MemberStarEntity;
 import jpabook.springjpashop.dto.MemberStarDto;
+import jpabook.springjpashop.dto.Patch.PatchMemberStarDto;
+import jpabook.springjpashop.dto.Patch.PatchMemberStarResponseDto;
+import jpabook.springjpashop.dto.PatchMemberResponseDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.MakeSentenceRepository;
 import jpabook.springjpashop.repository.MemberJpaRepository;
@@ -76,5 +79,41 @@ public class MemberStarService {
         }
         System.out.println("별점 총합" + totalRating);
         return ResponseDto.setSuccess("StarTotal 정보 조회 성공", totalRating);
+    }
+
+    //별점 수정 Api
+    public ResponseDto<PatchMemberStarResponseDto> patchMemberStar(PatchMemberStarDto dto, Long makeSentenceId , String userId){
+        Byte starRating = dto.getStarRating();
+        //별점을 주는 makeSentence 객체
+        MakeSentenceEntity makeSentenceEntity;
+        MemberEntity memberEntity;
+        try {
+            memberEntity = memberJpaRepository.findByUserId(userId);
+            System.out.println(memberEntity);
+                if (memberEntity ==null)
+                    return ResponseDto.setFailed("인증된 회원이 조회되지 않습니다");
+
+            makeSentenceEntity =makeSentenceRepository.findById(makeSentenceId).orElse(null);
+            System.out.println(makeSentenceEntity);
+                if (makeSentenceEntity == null)
+                    return ResponseDto.setFailed("해당 결합문장이 존재하지 않습니다.");
+
+
+        }catch (Exception e){
+            return ResponseDto.setFailed("DataBase Error");
+        }
+
+        MemberStarEntity memberStarEntity = memberStarJpaRepository.findByMemberIdAndMakeSenteceId(makeSentenceEntity.getId(),memberEntity.getId());
+        System.out.println("조건에 맞는 memberStar 출력" + memberStarEntity);
+
+        MemberStarEntity newMemberStarEntity = memberStarEntity;
+        memberStarEntity.setStarRating(starRating);
+        memberStarJpaRepository.save(memberStarEntity);
+
+        PatchMemberStarResponseDto patchMemberStarResponseDto = new PatchMemberStarResponseDto();
+        patchMemberStarResponseDto.setStarRating(starRating);
+        patchMemberStarResponseDto.setUserId(userId);
+
+        return ResponseDto.setSuccess("Success", patchMemberStarResponseDto);
     }
 }

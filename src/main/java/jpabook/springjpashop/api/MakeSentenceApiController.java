@@ -41,6 +41,7 @@ public class MakeSentenceApiController {
         JsonNode rootNode = mapper.readTree(jsonString);
 
 
+
         //makeSentence 저장
         ResponseDto<?> makeSentence = makeSentenceService.saveSentence(requestDto);
         System.out.println("TEST 찾기"+ makeSentence.getData());
@@ -48,6 +49,7 @@ public class MakeSentenceApiController {
         //makeSentence 객체 데이터
         MakeSentenceEntity makeSentenceData = (MakeSentenceEntity) makeSentence.getData();
 
+        //MemberSta 생성
 
         // patentSentence 파싱 및 PatentSentence 저장
         List<String> patentSentenceList = requestDto.getPatentSentence();
