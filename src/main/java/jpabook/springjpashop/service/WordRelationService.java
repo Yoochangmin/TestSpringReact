@@ -28,16 +28,12 @@ public class WordRelationService {
     }
 
     public ResponseDto<PatchWordRelationResponseDto> increaseWeight(Long wordId){
+        System.out.println("워드 아이디 :" + wordId);
         Long weight;
-        try {
-                if(wordRelationRepository.existsById(wordId))
-                    return ResponseDto.setFailed("해당 wordId가 없습니다");
-        }catch (Exception e){
-            return ResponseDto.setFailed("DataBase Error");
-        }
         //wordRelation 생성
 
         WordRelationEntity wordRelationEntity = wordRelationRepository.findById(wordId).orElse(null);
+        System.out.println("워드릴레이션 객체" + wordRelationEntity);
         weight = wordRelationEntity.getWeight() + 1L;
         wordRelationEntity.setWeight(weight);
 
