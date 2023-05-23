@@ -44,7 +44,7 @@ public class MakeSentenceController {
 
     @GetMapping("/api/auth/makeSentence/searchWord/{word}")
     public List<MakeSentenceEntity> searchWord(@PathVariable String word) {
-        return  this.makeSentenceRepository.findByCombineWord1OrCombineWord2(word);
+        return  this.makeSentenceRepository.findByCombineWord1OrCombineWord2(word,word);
 
     }
 
