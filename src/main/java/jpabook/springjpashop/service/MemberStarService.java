@@ -106,7 +106,6 @@ public class MemberStarService {
         MemberStarEntity memberStarEntity = memberStarJpaRepository.findByMemberIdAndMakeSenteceId(makeSentenceEntity.getId(),memberEntity.getId());
         System.out.println("조건에 맞는 memberStar 출력" + memberStarEntity);
 
-        MemberStarEntity newMemberStarEntity = memberStarEntity;
         memberStarEntity.setStarRating(starRating);
         memberStarJpaRepository.save(memberStarEntity);
 

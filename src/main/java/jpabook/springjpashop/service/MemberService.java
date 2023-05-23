@@ -44,8 +44,6 @@ public class MemberService {
         }catch (Exception e){
             return ResponseDto.setFailed("Data Base Erroe!!");
         }
-        System.out.println("id확인" + userId);
-        System.out.println("비밀번호 확인" + userPassword);
         //비밀번호가 다르면 failed response 변환
         if (!userPassword.equals(userPasswordCheck))
             return ResponseDto.setFailed("password does not matched");
