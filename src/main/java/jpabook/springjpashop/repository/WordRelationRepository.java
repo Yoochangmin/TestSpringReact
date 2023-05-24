@@ -11,4 +11,5 @@ public interface WordRelationRepository extends JpaRepository<WordRelationEntity
 
     List<WordRelationEntity> findByRootWord(String word);
     List<WordRelationEntity> findByRootWordAndWord(String rootword , String word);
+
 }

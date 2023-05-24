@@ -21,6 +21,8 @@ public class MakeSentenceController {
     private final MakeSentenceRepository makeSentenceRepository;
 
     private final PatentSentenceService patentSentenceService;
+
+    //생성문장 객체 불러오기
     @GetMapping("/api/auth/makeSentence/{id}")
     public MakeSentenceEntity getSentence(@PathVariable Long id) {
 
@@ -35,6 +37,7 @@ public class MakeSentenceController {
 
     }
 
+    //생성문장 검색 호출
     @GetMapping("/api/auth/makeSentence/searchSentence/{Sentence}")
     public List<MakeSentenceEntity> searchSentence(@PathVariable String Sentence) {
 
@@ -42,6 +45,7 @@ public class MakeSentenceController {
 
     }
 
+    //생성문장 단어 검색 호출
     @GetMapping("/api/auth/makeSentence/searchWord/{word}")
     public List<MakeSentenceEntity> searchWord(@PathVariable String word) {
         return  this.makeSentenceRepository.findByCombineWord1OrCombineWord2(word,word);

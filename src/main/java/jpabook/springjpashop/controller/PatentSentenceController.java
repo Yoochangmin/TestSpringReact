@@ -16,7 +16,7 @@ public class PatentSentenceController {
     @Autowired
     private final PatentSentenceService patentSentenceService;
 
-    @GetMapping("/api/auth/patentSentence/{id}")
+    @GetMapping("/api/auth/patentSentence/patchWeight/{id}")
     public ResponseDto<?> getPatentList(@PathVariable Long id) {
         System.out.println(id);
         ResponseDto<?> result = patentSentenceService.getPatentList(id);

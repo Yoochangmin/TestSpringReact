@@ -15,6 +15,8 @@ public class WordRelationService {
     @Autowired
     private final WordRelationRepository wordRelationRepository;
 
+    //연관 단어 등록
+
     public ResponseDto<WordRelationEntity> saveWord(WordRelationDto dto){
 
         WordRelationEntity wordRelationEntity = new WordRelationEntity(dto);
@@ -27,13 +29,13 @@ public class WordRelationService {
         return ResponseDto.setSuccess("Save Success!", wordRelationEntity);
     }
 
+    //연관단어 가중치 증가
     public ResponseDto<PatchWordRelationResponseDto> increaseWeight(Long wordId){
         System.out.println("워드 아이디 :" + wordId);
         Long weight;
         //wordRelation 생성
 
         WordRelationEntity wordRelationEntity = wordRelationRepository.findById(wordId).orElse(null);
-        System.out.println("워드릴레이션 객체" + wordRelationEntity);
         weight = wordRelationEntity.getWeight() + 1L;
         wordRelationEntity.setWeight(weight);
 
