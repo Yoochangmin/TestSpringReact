@@ -52,6 +52,10 @@ public class MakeSentenceController {
 
     }
 
+    @GetMapping("/api/auth/makeSentence/searchMindMap/{id}")
+    public List<MakeSentenceEntity>  searchMindMapSentence(@PathVariable Long id) {
+        return  this.makeSentenceRepository.findByMindMapEntityId(id);
 
+    }
 
 }
