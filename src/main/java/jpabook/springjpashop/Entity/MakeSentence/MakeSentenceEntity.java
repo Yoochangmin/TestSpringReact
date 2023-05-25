@@ -43,9 +43,9 @@ public class MakeSentenceEntity {
     @JoinColumn(name = "mind_map_id")
     private MindMapEntity mindMapEntity;
 
-//    @OneToMany(mappedBy = "makeSentenceEntity", fetch = FetchType.LAZY)
-//    private List<PatentSentenceEntity> patentSentenceEntity;
-
+    public void setMindMapEntity(MindMapEntity mindMapEntity) {
+        this.mindMapEntity = mindMapEntity;
+    }
 
     // 연관관계 메서드
     public MakeSentenceEntity(MakeSentenceDto dto){

@@ -36,7 +36,6 @@ public class MakeSentenceService {
         //인증된 회원의 마인드맵
         Long mindMapId = dto.getMindMapEntityId();
         System.out.println(mindMapId);
-
         MindMapEntity mindMapEntity =mindMapRepository.findById(mindMapId).orElse(null);
         try {
             mindMapRepository.findById(mindMapId).orElse(null);
@@ -51,7 +50,6 @@ public class MakeSentenceService {
         MakeSentenceEntity makeSentenceEntity = new MakeSentenceEntity(dto);
         makeSentenceEntity.setNowDataTime(LocalDateTime.now());
         makeSentenceEntity.setMindMapEntity(mindMapEntity);
-
         //데이터 베이스에 sentence 저장
         try {
             makeSentenceRepository.save(makeSentenceEntity);
