@@ -33,13 +33,9 @@ public class WordRelationController {
 
     }
     @GetMapping("/api/auth/wordRelation/{rootword}/{word}")
-    public boolean CheckWordRelation(@PathVariable String rootword, @PathVariable String word)
+    public WordRelationEntity CheckWordRelation(@PathVariable String rootword, @PathVariable String word)
     {
-        List<WordRelationEntity> result = wordRelationRepository.findByRootWordAndWord(rootword, word);
-        if(result.size()<=0)
-            return false;
-        else
-            return true;
+        return wordRelationRepository.findByRootWordAndWord(rootword, word);
     }
 
     @PatchMapping("/api/auth/wordRelation/{wordId}")
