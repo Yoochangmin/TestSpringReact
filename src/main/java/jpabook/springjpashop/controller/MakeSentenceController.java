@@ -29,6 +29,7 @@ public class MakeSentenceController {
         Optional<MakeSentenceEntity> result = this.makeSentenceRepository.findById(id);
 
 
+
         if (result.isPresent()) {
             return result.get();
         } else {
@@ -36,6 +37,15 @@ public class MakeSentenceController {
         }
 
     }
+
+//    @GetMapping("/api/auth/searchMindMap/{id}")
+//    public  List<Long> getMindMapIdBywordId(@PathVariable Integer id) {
+//
+//        List<Long>  result = this.makeSentenceRepository.findMindMapId(id);
+//
+//        return result;
+//
+//    }
 
     //생성문장 검색 호출
     @GetMapping("/api/auth/makeSentence/searchSentence/{Sentence}")

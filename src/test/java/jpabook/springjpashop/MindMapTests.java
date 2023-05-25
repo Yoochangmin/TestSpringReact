@@ -4,6 +4,7 @@ package jpabook.springjpashop;
 import jpabook.springjpashop.Entity.MindMap.MindMapEdge;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapNode;
+import jpabook.springjpashop.repository.MakeSentenceRepository;
 import jpabook.springjpashop.repository.MindMapRepository;
 import jpabook.springjpashop.repository.WordRelationRepository;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,6 +24,8 @@ import javax.persistence.PersistenceContext;
 public class MindMapTests {
     @Autowired
     MindMapRepository mindMapRepository;
+    @Autowired
+    MakeSentenceRepository makeSentenceRepository;
 
     @Autowired
     WordRelationRepository wordRelationRepository;
@@ -30,8 +34,6 @@ public class MindMapTests {
 
     @Test
     public void mapping(){
-
-
 
 
     }
