@@ -57,9 +57,14 @@ public class MakeSentenceService {
         }catch (Exception e){
             return ResponseDto.setFailed("Save Faild!");
         }
+        MakeSentenceReponseDto makeSentenceReponseDto = new MakeSentenceReponseDto();
+         String sentence= makeSentenceReponseDto.getSentence();
+         String combineWord1 = makeSentenceReponseDto.getCombineWord1();
+         String combineWord2 = makeSentenceReponseDto.getCombineWord2();
+         byte show = makeSentenceReponseDto.getShow();
+         Long mindMapEntityId =  makeSentenceReponseDto.getMindMapEntityId();
 
-
-        return ResponseDto.setSuccess("Save Success!", makeSentenceEntity);
+        return ResponseDto.setSuccess("Save Success!", makeSentenceReponseDto);
     }
 
 }

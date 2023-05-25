@@ -1,5 +1,6 @@
 package jpabook.springjpashop.controller;
 import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
+import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.*;
 import jpabook.springjpashop.service.MakeSentenceService;
 import jpabook.springjpashop.service.PatentSentenceService;
@@ -44,7 +45,8 @@ public class MakeSentenceController {
     @GetMapping("/api/auth/makeSentence/searchSentence/{Sentence}")
     public List<MakeSentenceEntity> searchSentence(@PathVariable String Sentence) {
 
-        return  this.makeSentenceRepository.findBySentenceLike("%"+Sentence+"%");
+        ResponseDto<?> result = makeSentenceService.searchSentence(Sentence);
+    return  this.makeSentenceRepository.findBySentenceLike("%"+Sentence+"%");
 
     }
 

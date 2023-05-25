@@ -18,9 +18,17 @@ public class SpringJpashopApplication {
 	@Bean
 	public WebMvcConfigurer corsConfigurere(){
 		return new WebMvcConfigurer(){
+			private final long MAX_AGE_SECS = 3600;
+
 			@Override
 			public void addCorsMappings(CorsRegistry registry){
-				registry.addMapping("/**").allowedOriginPatterns();
+				registry.addMapping("/**").allowedOriginPatterns()
+				.allowedOrigins("http://localhost:3000")
+						// GET, POST, PUT, PATCH, DELETE, OPTIONS 메서드를 허용한다.
+						.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+						.allowedHeaders("*")
+						.allowCredentials(true)
+						.maxAge(MAX_AGE_SECS);
 			}
 		};
 	}
