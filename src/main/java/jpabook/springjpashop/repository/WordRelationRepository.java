@@ -10,5 +10,7 @@ import java.util.List;
 public interface WordRelationRepository extends JpaRepository<WordRelationEntity, Long> {
 
     List<WordRelationEntity> findByRootWord(String word);
+
     WordRelationEntity findByRootWordAndWord(String rootWord , String word);
+
 }
