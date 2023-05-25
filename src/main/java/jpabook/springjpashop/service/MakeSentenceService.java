@@ -37,7 +37,7 @@ public class MakeSentenceService {
         //인증된 회원의 마인드맵
         Long mindMapId = dto.getMindMapEntityId();
         System.out.println(mindMapId);
-        MindMapEntity mindMapEntity =mindMapRepository.findById(mindMapId).orElse(null);
+        MindMapEntity mindMapEntity = mindMapRepository.findById(mindMapId).orElse(null);
         try {
             mindMapRepository.findById(mindMapId).orElse(null);
         }catch (Exception e){
@@ -57,12 +57,7 @@ public class MakeSentenceService {
         }catch (Exception e){
             return ResponseDto.setFailed("Save Faild!");
         }
-        MakeSentenceReponseDto makeSentenceReponseDto = new MakeSentenceReponseDto();
-         String sentence= makeSentenceReponseDto.getSentence();
-         String combineWord1 = makeSentenceReponseDto.getCombineWord1();
-         String combineWord2 = makeSentenceReponseDto.getCombineWord2();
-         byte show = makeSentenceReponseDto.getShow();
-         Long mindMapEntityId =  makeSentenceReponseDto.getMindMapEntityId();
+
 
         return ResponseDto.setSuccess("Save Success!", makeSentenceEntity);
     }
