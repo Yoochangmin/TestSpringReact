@@ -18,7 +18,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -59,10 +61,10 @@ public class MemberStarService {
 
     //MakeSentenceId에 해당하는 MemberStarTotal 출력
     public ResponseDto<?> getTotalStar(Long id) {
-
+        Map<String, Long> Data = new HashMap<>();
         Long totalRating = 0L;
         //인증된 회원의 마인드맵
-
+        Long mememberTotal = 0L;
         Optional<MakeSentenceEntity> makeSentenceEntityOptional = makeSentenceRepository.findById(id);
         if (makeSentenceEntityOptional.isPresent()) {
             System.out.println("옵셔널 데이터" + makeSentenceEntityOptional.get());
@@ -76,9 +78,12 @@ public class MemberStarService {
             Byte star = starList.getStarRating();
             System.out.println("점수: " + star);
             totalRating += star;
+            mememberTotal += 1;
         }
         System.out.println("별점 총합" + totalRating);
-        return ResponseDto.setSuccess("StarTotal 정보 조회 성공", totalRating);
+        Data.put("totalRating", totalRating);
+        Data.put("memberTotal", mememberTotal);
+        return ResponseDto.setSuccess("StarTotal 정보 조회 성공", Data);
     }
 
     //별점 수정 Api

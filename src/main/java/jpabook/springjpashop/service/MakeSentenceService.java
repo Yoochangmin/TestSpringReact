@@ -4,6 +4,7 @@ import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
+import jpabook.springjpashop.dto.MakeSentence.MakeSentenceReponseDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.MakeSentenceRepository;
 import jpabook.springjpashop.repository.MemberJpaRepository;
@@ -58,6 +59,12 @@ public class MakeSentenceService {
         }catch (Exception e){
             return ResponseDto.setFailed("Save Faild!");
         }
+        MakeSentenceReponseDto makeSentenceReponseDto = new MakeSentenceReponseDto();
+         String sentence= makeSentenceReponseDto.getSentence();
+         String combineWord1 = makeSentenceReponseDto.getCombineWord1();
+         String combineWord2 = makeSentenceReponseDto.getCombineWord2();
+         byte show = makeSentenceReponseDto.getShow();
+         Long mindMapEntityId =  makeSentenceReponseDto.getMindMapEntityId();
 
         return ResponseDto.setSuccess("Save Success!", makeSentenceEntity);
     }
