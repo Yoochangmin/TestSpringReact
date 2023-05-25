@@ -17,6 +17,6 @@ public class MakeSentenceReponseDto {
 
     private byte show;
 
-
+    private Long makeSentenceId;
     private Long mindMapEntityId;
 }

@@ -1,10 +1,14 @@
 package jpabook.springjpashop.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jpabook.springjpashop.Entity.MakeSentence.MakeSentenceEntity;
 import jpabook.springjpashop.Entity.MemberEntity;
 import jpabook.springjpashop.Entity.MindMap.MindMapEntity;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceDto;
 import jpabook.springjpashop.dto.MakeSentence.MakeSentenceReponseDto;
+import jpabook.springjpashop.dto.MindMap.MindMapNodeDto;
 import jpabook.springjpashop.dto.ResponseDto;
 import jpabook.springjpashop.repository.MakeSentenceRepository;
 import jpabook.springjpashop.repository.MemberJpaRepository;
@@ -18,8 +22,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -57,14 +60,39 @@ public class MakeSentenceService {
         }catch (Exception e){
             return ResponseDto.setFailed("Save Faild!");
         }
+        System.out.println(makeSentenceEntity);
         MakeSentenceReponseDto makeSentenceReponseDto = new MakeSentenceReponseDto();
-         String sentence= makeSentenceReponseDto.getSentence();
-         String combineWord1 = makeSentenceReponseDto.getCombineWord1();
-         String combineWord2 = makeSentenceReponseDto.getCombineWord2();
-         byte show = makeSentenceReponseDto.getShow();
-         Long mindMapEntityId =  makeSentenceReponseDto.getMindMapEntityId();
-
+        makeSentenceReponseDto.setMakeSentenceId(makeSentenceEntity.getId());
+         makeSentenceReponseDto.setSentence(makeSentenceEntity.getSentence());
+         makeSentenceReponseDto.setCombineWord1(makeSentenceEntity.getCombineWord1());
+         makeSentenceReponseDto.setCombineWord2(makeSentenceEntity.getCombineWord2());
+         makeSentenceReponseDto.setShow(makeSentenceEntity.getShow());
+         makeSentenceReponseDto.setMindMapEntityId(makeSentenceEntity.getMindMapEntity().getId());
         return ResponseDto.setSuccess("Save Success!", makeSentenceReponseDto);
     }
+
+
+    public ResponseDto<MakeSentenceReponseDto> searchSentence(String Sentence) {
+
+        List<MakeSentenceEntity> SentenceList = makeSentenceRepository.findBySentenceLike("%" + Sentence + "%");
+        Map<String,List> ListData = new HashMap<>();
+        System.out.println(SentenceList);
+        List<MakeSentenceReponseDto> makeSentenceReponseDto = new ArrayList<>();
+        for (MakeSentenceEntity makeSentence : SentenceList) {
+
+            System.out.println("makeSenteceData" + makeSentence);
+            MakeSentenceReponseDto dto = new MakeSentenceReponseDto();
+
+            String sentence = makeSentence.getSentence();
+            String combineWord1 = makeSentence.getCombineWord1();
+            String combineWord2 = makeSentence.getCombineWord2();
+            byte show = makeSentence.getShow();
+            Long mindMapEntityId = makeSentence.getMindMapEntity().getId();
+            makeSentenceReponseDto.add(dto);
+        }
+//        System.out.println("최종 확인" + ResponseMakeSentenceData);
+        return ResponseDto.setSuccess("Success", (MakeSentenceReponseDto) makeSentenceReponseDto);
+    }
+
 
 }

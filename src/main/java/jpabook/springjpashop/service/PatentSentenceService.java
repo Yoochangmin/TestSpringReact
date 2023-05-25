@@ -29,9 +29,10 @@ public class PatentSentenceService {
 
 
     //연관단어 저장
-    public ResponseDto<?> saveSentence(PatentSentenceDto dto){
-        MakeSentenceEntity makeSentenceEntity =dto.getMakeSentenceEntity();
+    public ResponseDto<?> saveSentence(PatentSentenceDto dto, Long makeSentenceId){
+        MakeSentenceEntity makeSentenceEntity = makeSentenceRepository.findById(makeSentenceId).orElse(null);
         PatentSentenceEntity patentSentenceEntity = new PatentSentenceEntity(dto);
+        patentSentenceEntity.setMakeSentenceEntity(makeSentenceEntity);
         //데이터베이스에 patentSentence 저장
         try {
             patentSentenceJpaRepository.save(patentSentenceEntity);

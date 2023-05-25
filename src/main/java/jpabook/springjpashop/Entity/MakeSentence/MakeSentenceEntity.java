@@ -38,7 +38,7 @@ public class MakeSentenceEntity {
 
     private LocalDateTime nowDataTime;
 
-//    @JsonIgnore
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mind_map_id")
     private MindMapEntity mindMapEntity;
