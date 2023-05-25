@@ -13,8 +13,6 @@ import java.util.Optional;
 @Repository
 public interface MakeSentenceRepository extends JpaRepository<MakeSentenceEntity, Long> {
 
-//    Optional<MakeSentenceEntity> findById(Long makeSentenceId);
-
     List<MakeSentenceEntity> findBySentenceLike(String s);
     List<MakeSentenceEntity> findByCombineWord1OrCombineWord2(String word1, String Word2);
 
