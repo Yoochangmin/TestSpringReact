@@ -72,26 +72,32 @@ public class MakeSentenceService {
     }
 
 
-    public ResponseDto<MakeSentenceReponseDto> searchSentence(String Sentence) {
+    public  List<MakeSentenceReponseDto> searchSentence(String Sentence) {
 
         List<MakeSentenceEntity> SentenceList = makeSentenceRepository.findBySentenceLike("%" + Sentence + "%");
-        Map<String,List> ListData = new HashMap<>();
+
+        Map<Long,Map<String,String>> ListData = new HashMap<>();
+
         System.out.println(SentenceList);
         List<MakeSentenceReponseDto> makeSentenceReponseDto = new ArrayList<>();
         for (MakeSentenceEntity makeSentence : SentenceList) {
 
             System.out.println("makeSenteceData" + makeSentence);
-            MakeSentenceReponseDto dto = new MakeSentenceReponseDto();
 
-            String sentence = makeSentence.getSentence();
-            String combineWord1 = makeSentence.getCombineWord1();
-            String combineWord2 = makeSentence.getCombineWord2();
-            byte show = makeSentence.getShow();
-            Long mindMapEntityId = makeSentence.getMindMapEntity().getId();
+            MakeSentenceReponseDto dto = new MakeSentenceReponseDto();
+            dto.setMakeSentenceId(makeSentence.getId());
+            dto.setSentence(makeSentence.getSentence());
+            dto.setCombineWord1(makeSentence.getCombineWord1());
+            dto.setCombineWord2(makeSentence.getCombineWord2());
+            dto.setShow(makeSentence.getShow());
+            dto.setMindMapEntityId(makeSentence.getMindMapEntity().getId());
             makeSentenceReponseDto.add(dto);
         }
+
+
+
 //        System.out.println("최종 확인" + ResponseMakeSentenceData);
-        return ResponseDto.setSuccess("Success", (MakeSentenceReponseDto) makeSentenceReponseDto);
+        return  makeSentenceReponseDto;
     }
 
 
