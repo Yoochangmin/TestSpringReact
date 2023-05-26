@@ -88,6 +88,8 @@ public class MakeSentenceService {
             dto.setMakeSentenceId(makeSentence.getId());
             dto.setSentence(makeSentence.getSentence());
             dto.setCombineWord1(makeSentence.getCombineWord1());
+            dto.setNowDataTime(LocalDateTime.now());
+
             dto.setCombineWord2(makeSentence.getCombineWord2());
             dto.setShow(makeSentence.getShow());
             dto.setMindMapEntityId(makeSentence.getMindMapEntity().getId());

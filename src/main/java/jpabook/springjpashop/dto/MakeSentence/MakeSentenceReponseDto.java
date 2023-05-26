@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -16,6 +17,7 @@ public class MakeSentenceReponseDto {
     private String combineWord2;
 
     private byte show;
+    private LocalDateTime nowDataTime;
 
     private Long makeSentenceId;
     private Long mindMapEntityId;

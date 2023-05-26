@@ -51,6 +51,7 @@ public class MemberStarApiController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         System.out.println("인증 회원 정보 찾기" + userId);
+
         MemberEntity memberEntity = memberJpaRepository.findByUserId(userId);
         MemberEntity member =(MemberEntity) memberEntity;
 

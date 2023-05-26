@@ -18,7 +18,7 @@ public interface MemberStarJpaRepository extends JpaRepository<MemberStarEntity,
 
 
     @Query("SELECT m from MemberStar m where m.memberEntity.id = :memberId and m.makeSentenceEntity.id = :makeSentenceId")
-    MemberStarEntity findByMemberIdAndMakeSenteceId(Long memberId, Long makeSentenceId);
+    MemberStarEntity findByMemberIdAndMakeSentenceId(Long memberId, Long makeSentenceId);
 
 
 

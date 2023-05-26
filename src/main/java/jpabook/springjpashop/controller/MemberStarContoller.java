@@ -34,6 +34,7 @@ public class MemberStarContoller {
         return result;
     }
 
+    //개인 별점 조회
     @GetMapping("api/auth/memberStar/{makeSentenceId}")
     public MemberStarEntity getMemberStar(@PathVariable Long makeSentenceId) {
 
@@ -41,8 +42,7 @@ public class MemberStarContoller {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         MemberEntity memberEntity = memberJpaRepository.findByUserId(userId);
-        MemberEntity member =(MemberEntity) memberEntity;
-        MemberStarEntity result = memberStarJpaRepository.findByMemberIdAndMakeSenteceId(member.getId(),makeSentenceId);
+        MemberStarEntity result = memberStarJpaRepository.findByMemberIdAndMakeSentenceId(memberEntity.getId(),makeSentenceId);
         return result;
     }
 
