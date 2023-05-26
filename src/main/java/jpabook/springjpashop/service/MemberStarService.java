@@ -107,6 +107,14 @@ public class MemberStarService {
         }catch (Exception e){
             return ResponseDto.setFailed("DataBase Error");
         }
+        try {
+            MemberStarEntity memberStarEntity = memberStarJpaRepository.findByMemberIdAndMakeSentenceId(makeSentenceEntity.getId(),memberEntity.getId());
+            System.out.println("확인" + memberStarEntity);
+            if (memberStarEntity ==null)
+                System.out.println("memberStarEntity is null");
+        }catch (Exception e){
+            return ResponseDto.setFailed("DataBase Error");
+        }
 
         MemberStarEntity memberStarEntity = memberStarJpaRepository.findByMemberIdAndMakeSentenceId(memberEntity.getId(),makeSentenceEntity.getId());
         System.out.println("조건에 맞는 memberStar 출력" + memberStarEntity);

@@ -67,8 +67,8 @@ public class MemberStarApiController {
         return result;
     }
 
-    @PatchMapping("/api/auth/patchMemberStar/{makeSentenceId}/{userId}")
-    public ResponseDto<PatchMemberStarResponseDto> patchMemberStar(@RequestBody PatchMemberStarDto requestBody, @PathVariable Long makeSentenceId, @PathVariable String userId){
+    @PatchMapping("/api/auth/patchMemberStar/{makeSentenceId}")
+    public ResponseDto<PatchMemberStarResponseDto> patchMemberStar(@RequestBody PatchMemberStarDto requestBody, @PathVariable Long makeSentenceId, @AuthenticationPrincipal String userId){
 
         PatchMemberStarDto dto = new PatchMemberStarDto(requestBody.getStarRating());
 
