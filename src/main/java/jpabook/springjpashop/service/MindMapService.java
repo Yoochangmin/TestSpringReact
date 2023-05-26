@@ -119,11 +119,14 @@ public class MindMapService{
             System.out.println( "데이터 없음");
         }
         Long idx = mindMapEntityId.get().getId();
+        List<String> rootWord = new ArrayList<>();;
+        rootWord.add(mindMapEntityId.get().getHighestWord());
         List<MindMapNode> nodeData = mindMapNodeRepository.findByNode(idx);
         List<MindMapEdge> edgeData = mindMapEdgeRepository.findByEdge(idx);
 
             mindMapData.add(nodeData);
             mindMapData.add(edgeData);
+            mindMapData.add(rootWord);
 
         return ResponseDto.setSuccess("마인드맵 정보 조회 성공",  mindMapData);
     }
