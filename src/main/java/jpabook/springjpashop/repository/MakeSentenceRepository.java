@@ -14,7 +14,6 @@ import java.util.Optional;
 public interface MakeSentenceRepository extends JpaRepository<MakeSentenceEntity, Long> {
 
     List<MakeSentenceEntity> findBySentenceLike(String s);
-    List<MakeSentenceEntity> findByCombineWord1OrCombineWord2(String word1, String Word2);
 
     List<MakeSentenceEntity>  findByMindMapEntityId(Long id);
 

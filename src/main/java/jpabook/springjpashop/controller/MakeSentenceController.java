@@ -50,13 +50,6 @@ public class MakeSentenceController {
 
     }
 
-    //생성문장 단어 검색 호출
-    @GetMapping("/api/auth/makeSentence/searchWord/{word}")
-    public List<MakeSentenceEntity> searchWord(@PathVariable String word) {
-        return  this.makeSentenceRepository.findByCombineWord1OrCombineWord2(word,word);
-
-    }
-
     @GetMapping("/api/auth/makeSentence/searchMindMap/{id}")
     public List<MakeSentenceEntity>  searchMindMapSentence(@PathVariable Long id) {
         return  this.makeSentenceRepository.findByMindMapEntityId(id);
